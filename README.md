@@ -21,6 +21,7 @@
 <li>Custom backgroung for log in screen</li>
 <li>Custom logo for store</li>
 <li>Name for store and user story</li>
+<li>Need three triggers</li>
 </ul>
 </body>
 </html>
