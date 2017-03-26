@@ -23,5 +23,11 @@
 <li>Name for store and user story</li>
 <li>Need three triggers</li>
 </ul>
+
+<h4>Useful links</h4>
+<ul>
+<li>Html/CSS/JavaScript crash course https://www.youtube.com/watch?v=wrdR5Su_Stg&list=FLzztnw-W4z_GS6DyGaIUoSQ&index=11</li>
+<li>PHP/MySQL tutorial https://www.youtube.com/watch?v=mpQts3ezPVg</li>
+</ul>
 </body>
 </html>
