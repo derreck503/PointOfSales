@@ -17,50 +17,74 @@
     <div class="container-fluid">
         <!--8 column width for the sales register container-->
         <div class="col-lg-8">
-            <h2>Sales Registars:</h2>
-            <!--Table for checkout-->
-            <table class="table table-condensed" border= "1">
-                <thead>
-                    <tr>
-                        <th>Qty</th>
-                        <th>Product</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>3</td>
-                        <td>Shoes</td>
-                        <td>Shoes for babies</td>
-                        <td>$3</td>
-                        <td>$3</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Shoes</td>
-                        <td>Shoes for babies</td>
-                        <td>$3</td>
-                        <td>$3</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Shoes</td>
-                        <td>Shoes for babies</td>
-                        <td>$3</td>
-                        <td>$3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <!--search bar for products-->
+            <form role="form">
+                <div class="input">
+                    <input type="text" class="form-control" placeholder="Type a product">
+                    <br>
+                    <button type="button" class="btn btn-success">Search</button>
+                </div>
+            </form>
 
-        <!--4 column width for the whole customer details, etc..container-->
-        <div class="col-lg-4">
-            <h2>Customer Details:</h2>
-        </div>
+            <!--Dropdown list with products to select from-->
+            <div class="dropdown">
+                <select class="form-control">
+            <option value="volvo">Select a Product</option>
+            <option value="volvo">Baby Shoes</option>
+            <option value="saab">Baby Shirt</option>
+            <option value="vw">Baby Toy</option>
+            <option value="audi" selected>Baby Food</option>
+            </select>
+            </div>
+            <br>
 
-    </div>
+            <!-- button to generate overall sales-->
+            <a href="#" class="btn btn-success" id="menu-toggle">Show Overview of Inventory</a>
+   
+                <h2>Sales Registars:</h2>
+                <!--Table for checkout-->
+                <table class="table table-condensed" border="1">
+                    <thead>
+                        <tr>
+                            <th>Qty</th>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3</td>
+                            <td>Shoes</td>
+                            <td>Shoes for babies</td>
+                            <td>$3</td>
+                            <td>$3</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Shoes</td>
+                            <td>Shoes for babies</td>
+                            <td>$3</td>
+                            <td>$3</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Shoes</td>
+                            <td>Shoes for babies</td>
+                            <td>$3</td>
+                            <td>$3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--4 column width for the whole customer details, etc..container-->
+            <div class="col-lg-4">
+                <h2>Customer Details:</h2>
+            </div>
+
+        </div>
 </body>
 
 </html>
