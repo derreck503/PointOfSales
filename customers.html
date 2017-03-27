@@ -12,20 +12,24 @@
 
 <body>
     <div id="navigation-bar"></div>
-
+  
+  
     <!--Table for report-->
     <div class="container-fluid">
         <!--one huge column for the whole container-->
         <div class="col-lg-12">
         <!--search bar for products-->
-        <form role="form">
-            <div class="input" >
-                <input type="text" class="form-control" placeholder="Search for customer">
-                <br>
-                <button type="button" class="btn btn-success">Search</button>
-            </div>
-        </form>
+        <div class="well">
+            <form role="form">
+                <div class="input" >
+                    <input type="text" class="form-control" placeholder="Search for customer">
+                    <br>
+                    <button type="button" class="btn btn-success">Search</button>
+                </div>
+            </form>
+        </div>
 
+        <div class="well">
         <h2>Customer records</h2>
         <table class="table table-striped">
             <!--Head means title columns-->
@@ -78,6 +82,7 @@
             </tbody>
         </table>
         </div>
+    </div>
 </div>
 </body>
 
