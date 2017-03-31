@@ -4,10 +4,13 @@
     <title>Dashboard</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+ProSource+Sans+Pro:400,600">
+    <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/loadNavBar.js"></script>
+    <script src="js/custom.js"></script>
 </head>
 
 
@@ -17,110 +20,101 @@
 
     <!--Table for report-->
     <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-3" style="text-align:center;">
+               <h2>Welcome back,</h2>
+               <h1>&lt;Employee Name&gt;</h1>
+	    	</div>
+	    	<div class="col-md-3 col-xs-4">
+	    		<div class="well">
+		    		<h1>$200.00</h1>
+		    		<h4>Your Sales</h4>
+		    	</div>
+	    	</div>
+	    	<div class="col-md-3 col-xs-4">
+		    	<div class="well">
+		    		<h1>$1200.00</h1>
+		    		<h4>Total Sales</h4>
+		    	</div>
+	    	</div>
+	    	<div class="col-md-3 col-xs-4">
+	    		<div class="well">
+		    		<h1>30</h1>
+		    		<h4>Club Members</h4>
+		    	</div>
+	    	</div>
+    	</div>
+    	<div class="row">
+	    	<div class="col-md-8" style="text-align:center;">
+		    	<hr>
+		    	<h2>Sales Register</h2>
+	    	</div>
+    	</div>
         <!--8 column width for the left container-->
         <div class="col-md-8">
             <row>
             <div class="well">
-                <h2>Sales Overview:</h2>
-                <table class="table table-striped">
-                    <!--Head means title columns-->
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Total Sales</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Total Profit</th>
-                        </tr>
-                    </thead>
-                    <!--Each tr is a row and td is a cell for each column-->
-                    <tbody>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                    </tbody>
-                </table>
-               </div>
-            </row>
-            <row>
-            <div class="well">
-                <h2>Inventory Overview:</h2>
-                <table class="table table-striped">
-                    <!--Head means title columns-->
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Total Sales</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Total Profit</th>
-                        </tr>
-                    </thead>
-                    <!--Each tr is a row and td is a cell for each column-->
-                    <tbody>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                        <tr>
-                            <td>Baby Shoe</td>
-                            <td>5</td>
-                            <td>Baby Footware</td>
-                            <td>3</td>
-                            <td>$30</td>
-                        </tr>
-                    </tbody>
-                </table>
-               </div>
+            	<table class="table table-bordered table-condensed">
+	            	<thead>
+	                    <tr>
+	                        <th>Product</th>
+	                        <th>Color</th>
+	                        <th>Size</th>
+	                        <th>Quantity</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                	<tr>
+	                		<td>
+	                			<div class="dropdown">
+				                <select class="form-control product">
+				                <option value="volvo">Baby Shoes</option>
+				                <option value="saab">Baby Shirt</option>
+				                <option value="vw">Baby Toy</option>
+				                <option value="audi" >Baby Food</option>
+				                </select>
+				            	</div>
+	                		</td>
+	                		<td>
+	                			<div class="dropdown">
+				                <select class="form-control color" disabled>
+				                <option value="volvo">Blue</option>
+				                <option value="saab">Yellow</option>
+				            	</div>
+	                		</td>
+	                		<td>
+	                			<div class="dropdown">
+				                <select class="form-control size" disabled>
+				                <option value="volvo">XS</option>
+				                <option value="saab">S</option>
+				                <option value="vw">M</option>
+				                <option value="audi" >L</option>
+				                </select>
+				            	</div>
+	                		</td>
+	                		<td class="col-md-3">
+	                			<div class="dropdown">
+				                <select class="form-control quantity" disabled>
+				                <option value="volvo">0</option>
+				                <option value="saab">1</option>
+				                <option value="vw">2</option>
+				                <option value="audi" >3</option>
+				                </select>
+				            	</div>
+	                		</td>
+	                	</tr>
+	                	<tr id="insert"></tr>
+	                	<tr>
+	                		<td colspan="4" align="center">
+	                			<button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+	                		</td>
+	                	</tr>
+	                </tbody>
+            	</table>
+                <h4>Customer Details</h4>
+                <p>Search for customer in database or</p>
+                <p>Enter new details</p>
+             </div>
             </row>
         </div>
         <!--4 column width for the right container-->
