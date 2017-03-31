@@ -13,77 +13,116 @@
 <body>
     <div id="navigation-bar"></div>
   
-  
     <!--Table for report-->
     <div class="container-fluid">
         <!--one huge column for the whole container-->
         <div class="col-lg-12">
-        <!--search bar for products-->
-        <div class="well">
-            <form role="form">
-                <div class="input" >
+        <h2>Customer Details</h2>
+        <hr>
+            <!--search bar-->
+            <div class="well">
+                <form role="form">
+                    <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group" >
+                            <label for="sel1">Filter by:</label>
+                            <select class="form-control" id="sel1">
+                            <option>Last Name</option>
+                            <option>First Name</option>
+                            <option>Email</option>
+                            <option>Country</option>
+                            <option>Postal Code</option>
+                            </select>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-4">
                     <input type="text" class="form-control" placeholder="Search for customer">
+                    </div>
+                    </div>
                     <br>
-                    <button type="button" class="btn btn-success">Search</button>
-                </div>
-            </form>
-        </div>
+                    <button type="button" class="btn btn-primary">Search</button>
+                </form>
+            </div>
 
-        <div class="well">
-        <h2>Customer records</h2>
-        <table class="table table-striped">
-            <!--Head means title columns-->
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <!--Each tr is a row and td is a cell for each column-->
-            <tbody>
-                <tr>
-                    <td>Baby Shoe</td>
-                    <td>5</td>
-                    <td>Baby Footware</td>
-                    <td>3</td>
-                    <td>$30</td>
-                </tr>
-                <tr>
-                    <td>Baby Shoe</td>
-                    <td>5</td>
-                    <td>Baby Footware</td>
-                    <td>3</td>
-                    <td>$30</td>
-                </tr>
-                <tr>
-                    <td>Baby Shoe</td>
-                    <td>5</td>
-                    <td>Baby Footware</td>
-                    <td>3</td>
-                    <td>$30</td>
-                </tr>
-                <tr>
-                    <td>Baby Shoe</td>
-                    <td>5</td>
-                    <td>Baby Footware</td>
-                    <td>3</td>
-                    <td>$30</td>
-                </tr>
-                <tr>
-                    <td>Baby Shoe</td>
-                    <td>5</td>
-                    <td>Baby Footware</td>
-                    <td>3</td>
-                    <td>$30</td>
-                </tr>
-            </tbody>
-        </table>
+            <!-- table of search results -->
+            <table class="table table-bordered table-condensed">
+                <!--Head means title columns-->
+                <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Postal</th>
+                        <th>Country</th>
+                        <th>Phone no.</th>
+                        <th>Email</th>
+                        <th>Club Member</th>
+                    </tr>
+                </thead>
+                <!--Each tr is a row and td is a cell for each column-->
+                <tbody>
+                    <tr>
+                        <td>Mitchell</td>
+                        <td>Rose</td>
+                        <td>502 Bluestem Crossing</td>
+                        <td>Houston</td>
+                        <td>77014</td>
+                        <td>China</td>
+                        <td>832-534-1632</td>
+                        <td>rmitchell0@google.com.au</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Mitchell</td>
+                        <td>Rose</td>
+                        <td>502 Bluestem Crossing</td>
+                        <td>Houston</td>
+                        <td>77014</td>
+                        <td>China</td>
+                        <td>832-534-1632</td>
+                        <td>rmitchell0@google.com.au</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Mitchell</td>
+                        <td>Rose</td>
+                        <td>502 Bluestem Crossing</td>
+                        <td>Houston</td>
+                        <td>77014</td>
+                        <td>China</td>
+                        <td>832-534-1632</td>
+                        <td>rmitchell0@google.com.au</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Mitchell</td>
+                        <td>Rose</td>
+                        <td>502 Bluestem Crossing</td>
+                        <td>Houston</td>
+                        <td>77014</td>
+                        <td>China</td>
+                        <td>832-534-1632</td>
+                        <td>rmitchell0@google.com.au</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Mitchell</td>
+                        <td>Rose</td>
+                        <td>502 Bluestem Crossing</td>
+                        <td>Houston</td>
+                        <td>77014</td>
+                        <td>China</td>
+                        <td>832-534-1632</td>
+                        <td>rmitchell0@google.com.au</td>
+                        <td>No</td>
+                    </tr>
+                </tbody>
+            </table>  
         </div>
     </div>
-</div>
 </body>
 
 </html>
