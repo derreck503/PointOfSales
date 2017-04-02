@@ -1,0 +1,63 @@
+/* navbar */
+.navbar-default {
+    background-color: #5eb250;
+    border-color: #5eb250;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #FFFFFF;
+    font-family: 'Pacifico';
+    font-size:30px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #fff;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:400;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #fff;
+    font-weight:600;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: rgba(0,0,0,.1);
+    font-weight:600;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: rgba(0,0,0,.1);
+}
+
+/* Mobile version */
+.navbar-default .navbar-toggle {
+    border-color: rgba(0,0,0,.1);
+    background-color: #5eb250;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #5eb250;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFF;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+          color: #333;
+    }
+}
