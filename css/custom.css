@@ -1,6 +1,10 @@
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Open Sans',sans-serif;
+}
+
 /* navbar */
 .navbar-default {
-    background-color: #5eb250 !important;
+    background-color: #5eb250;
     border-color: #5eb250;
 }
 /* Title */
