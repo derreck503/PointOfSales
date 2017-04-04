@@ -28,6 +28,7 @@
 <ul>
 <li>Html/CSS/JavaScript crash course https://www.youtube.com/watch?v=wrdR5Su_Stg&list=FLzztnw-W4z_GS6DyGaIUoSQ&index=11</li>
 <li>PHP/MySQL tutorial https://www.youtube.com/watch?v=mpQts3ezPVg</li>
+<li>Chartist.js https://gionkunz.github.io/chartist-js/</li>
 </ul>
 </body>
 </html>
