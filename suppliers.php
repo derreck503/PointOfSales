@@ -30,8 +30,9 @@ echo 'Success';
         <div class="col-lg-12">
             <h2>Suppliers Details</h2>
         <hr>
-            <!--search bar-->
-            <div class="well"><div class="dropdown form-group">
+            <!--Dropdown bar-->
+            <div class="well">
+            <div class="dropdown form-group">
                 <label for="selectProduct">Select product from dropdown:</label>
                 <select class="form-control" id="selectProduct">
                 <option value="volvo">Select a Product</option>
@@ -97,6 +98,17 @@ echo 'Success';
                         ?>
                 </tbody>
             </table>
+            <?php
+            $sql=mysql_query("SELECT SupplierID,CompanyName FROM POSDB.Supplier");
+            if(mysql_num_rows($sql)){
+            $select= '<select name="select">';
+            while($rs=mysql_fetch_array($sql)){
+                $select.='<option value="'.$rs['SupplierID'].'">'.$rs['CompanyName'].'</option>';
+                }
+            }
+                $select.='</select>';
+                echo $select;
+            ?>
         </div>
     </div>
 </div>
