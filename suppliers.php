@@ -98,6 +98,7 @@ echo 'Success';
                         ?>
                 </tbody>
             </table>
+            <!--Dropdown Table php attempt-->
             <?php
             $sql=mysql_query("SELECT SupplierID,CompanyName FROM POSDB.Supplier");
             if(mysql_num_rows($sql)){
