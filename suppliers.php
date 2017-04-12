@@ -1,3 +1,9 @@
+<?php
+error_reporting(0);
+require 'database/connect.php';
+echo 'Success';
+?>
+
 <html>
 
 <head>
@@ -54,62 +60,41 @@
                 <!--Head means title columns-->
                 <thead>
                     <tr>
-                        <th>Sale no.</th>
-                        <th>Employee</th>
-                        <th>Customer</th>
-                        <th>Product</th>
-                        <th>Date</th>
-                        <th>Qty</th>
-                        <th>Sale Total ($)</th>
+                        <th>SupplierID</th>
+                        <th>Company Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Postal Code</th>
+                        <th>Country</th>
+                        <th>Phone</th>
+                        <th>Re-StockLevel</th>
+                        <th>Country</th>
                     </tr>
                 </thead>
                 <!--Each tr is a row and td is a cell for each column-->
                 <tbody>
-                    <tr>
-                        <td>123</td>
-                        <td>Rose</td>
-                        <td>Earl</td>
-                        <td>Socks</td>
-                        <td>3/31/17</td>
-                        <td>2</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>123</td>
-                        <td>Rose</td>
-                        <td>Earl</td>
-                        <td>Socks</td>
-                        <td>3/31/17</td>
-                        <td>2</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>123</td>
-                        <td>Rose</td>
-                        <td>Earl</td>
-                        <td>Socks</td>
-                        <td>3/31/17</td>
-                        <td>2</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>123</td>
-                        <td>Rose</td>
-                        <td>Earl</td>
-                        <td>Socks</td>
-                        <td>3/31/17</td>
-                        <td>2</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>123</td>
-                        <td>Rose</td>
-                        <td>Earl</td>
-                        <td>Socks</td>
-                        <td>3/31/17</td>
-                        <td>2</td>
-                        <td>10</td>
-                    </tr>
+                    <?php
+                    $query = $db->query("SELECT * FROM POSDB.Supplier");
+                    if($count = $query->num_rows){
+                        $rows = $query->fetch_all(MYSQLI_ASSOC);
+                        foreach($rows as $row){
+                            //echo $row['CompanyName'], '<br>';
+                    echo'<tr>';
+                        echo'<td>', $row['SupplierID'],'</td>';
+                        echo'<td>', $row['CompanyName'],'</td>';
+                        echo'<td>', $row['Address'],'</td>';
+                        echo'<td>', $row['City'],'</td>';
+                        echo'<td>', $row['State'],'</td>';
+                        echo'<td>', $row['PostalCode'],'</td>';
+                        echo'<td>', $row['Country'],'</td>';
+                        echo'<td>', $row['Phone'],'</td>';
+                        echo'<td>', $row['ReStockLevel'],'</td>';
+                        echo'<td>', $row['UnitCost'],'</td>';
+                    echo'</tr>';
+                                        }
+                                        }
+                        ?>
                 </tbody>
             </table>
         </div>
