@@ -32,12 +32,12 @@ require 'database/connect.php';
           <hr>
           <!--Select Supplier from dropdown-->
           <div class="dropdown form-group">
-            <label for="selectSupplier">Select Supplier from dropdown:</label>
             <form action="" method="post" name="myForm" id="myForm">
               <table>
                 <tr>
                   <td>
                     <select name="selectedValue" class="form-control">
+                    <option>Select a supplier</option>
                       <?php
                         $sql = $db->query("SELECT CompanyName, SupplierID FROM POSDB.Supplier");
                         if($sql->num_rows){
@@ -48,10 +48,8 @@ require 'database/connect.php';
                         }
                         ?>
                     </select>
-                </tr>
-                <tr>
                   <td>
-                    <input type="submit" name="submit" value="Submit"/>
+                    <input type="submit" class="btn btn-primary" name="submit" value="Submit"/>
                   </td>
                 </tr>
               </table>
