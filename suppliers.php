@@ -55,6 +55,42 @@ require 'database/connect.php';
               </table>
             </form>
           </div>
+        <hr>
+          <!--Delete a Supplier from dropdown-->
+          <div class="dropdown form-group">
+            <form action="" method="post" name="myForm" id="myForm">
+              <table>
+                <tr>
+                  <td>
+                    <select name="selectedDeleteValue" class="form-control">
+                    <option>Select a supplier to Delete</option>
+                      <?php
+                        $sql = $db->query("SELECT CompanyName, SupplierID FROM POSDB.Supplier");
+                        if($sql->num_rows){
+                            $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+                            foreach($suppliers as $sup){
+                                echo '<option value="',$sup['SupplierID'],'" id="selection">',$sup['CompanyName'],'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                  <td>
+                    <input type="submit" class="btn btn-primary" name="Delete" value="Delete"/>
+                  </td>
+                </tr>
+              </table>
+            </form>
+            <?php
+                if(isset($_POST['Delete'])){
+                    $deletion = $_POST['selectedDeleteValue']; 
+                    echo "Deleted ";
+                    echo $deletion;
+                //$delete = $db->exec("DELETE * FROM POSDB.Supplier Where SupplierID = $deletion");
+                $delete = $db->query("DELETE FROM POSDB.Supplier Where SupplierID = $deletion");
+                $result = mysql_query($delete);
+                }
+                ?>
+          </div>
         </div>
 
           <!-- Table for showing all Suppliers -->
