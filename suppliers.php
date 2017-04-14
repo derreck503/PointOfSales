@@ -171,6 +171,7 @@ require 'database/connect.php';
                         echo'<td>', $row['Phone'],'</td>';
                         echo'<td>', $row['ReStockLevel'],'</td>';
                         echo'<td>', $row['UnitCost'],'</td>';
+                        echo'</tr>';
                     }
                 }
                 ?>

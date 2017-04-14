@@ -13,6 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/loadNavBar.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/showAllCustomers.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
             <hr>
             <!--search bar-->
             <div class="well">
-                <input type="button" class="btn btn-primary" onclick="showAll();">Show all customers</button>
+                <button type="button" class="btn btn-primary" onclick="showAllCustomersTable();">Show all Customers</button>
                 <form role="form">
                     <input type="text" class="form-control" placeholder="Search for customer">
                     <button type="button" class="btn btn-primary">Search</button>
@@ -34,17 +35,18 @@
             </div>
 
             <!-- table of search results -->
-            <table class="table table-bordered table-condensed" style="display:none">
+            <table class="table table-bordered table-condensed" id="showAllCustomerResults" style="display:none">
                 <!--Head means title columns-->
                 <thead>
                     <tr>
+                        <th>CustomerID</th>
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Address</th>
                         <th>City</th>
                         <th>Postal</th>
                         <th>Country</th>
-                        <th>Phone no.</th>
+                        <th>Phone #</th>
                         <th>Email</th>
                         <th>Club Member</th>
                     </tr>
@@ -52,21 +54,14 @@
                 <!--Each tr is a row and td is a cell for each column-->
                 <tbody>
                     <?php
-                $query = $db->query("SELECT * FROM POSDB.Supplier");
-                if($count = $query->num_rows){
-                    $rows = $query->fetch_all(MYSQLI_ASSOC);
-                    foreach($rows as $row){
+                $query1 = $db->query("SELECT * FROM POSDB.Customer");
+                if($counts = $query1->num_rows){
+                    $rows1 = $query1->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows1 as $row1){
                         echo'<tr>';
-                        echo'<td>', $row['SupplierID'],'</td>';
-                        echo'<td>', $row['CompanyName'],'</td>';
-                        echo'<td>', $row['Address'],'</td>';
-                        echo'<td>', $row['City'],'</td>';
-                        echo'<td>', $row['State'],'</td>';
-                        echo'<td>', $row['PostalCode'],'</td>';
-                        echo'<td>', $row['Country'],'</td>';
-                        echo'<td>', $row['Phone'],'</td>';
-                        echo'<td>', $row['ReStockLevel'],'</td>';
-                        echo'<td>', $row['UnitCost'],'</td>';
+                        echo'<td>', $row1['CustomerID'],'</td>';
+                        echo'<td>', $row1['LastName'],'</td>';
+                        echo'</tr>';
                     }
                 }
                 ?>
