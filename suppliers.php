@@ -132,7 +132,7 @@ require 'database/connect.php';
                 $reStockLevel = $_POST['Re-StockLevel'];
                 $unitCost = $_POST['UnitCost'];
 
-                $create = $db->query("INSERT INTO POSDB.Supplier (`SupplierID`, `CompanyName`, `Address`, `City`, `State`, `PostalCode`, `Country`, `Phone`, `ReStockLevel`, `UnitCost`) VALUES($sID, '$cName', '$address', '$city', '$state', '$postalCode', '$country', '$phone', $reStockLevel, $unitCost)");
+                $create = $db->query("INSERT INTO POSDB.Supplier (`SupplierID`, `CompanyName`, `Address`, `City`, `State`, `PostalCode`, `Country`, `Phone`, `ReStockLevel`, `UnitCost`) VALUES(0, '$cName', '$address', '$city', '$state', '$postalCode', '$country', '$phone', $reStockLevel, $unitCost)");
 
                 $results = mysql_query($create);
             }
