@@ -27,7 +27,7 @@ require 'database/connect.php';
       <!--one huge column for the whole container-->
       <div class="col-lg-12">
         <div class="well">
-          <!--Show All Suppliers-->
+          <!--Show All Suppliers Button-->
           <button type="button" class="btn btn-primary" onclick="showAll();">Show all suppliers</button>
           <hr>
           <!--Select Supplier from dropdown-->
@@ -39,14 +39,14 @@ require 'database/connect.php';
                     <select name="selectedValue" class="form-control">
                       <option>Select a supplier</option>
                       <?php
-$sql = $db->query("SELECT CompanyName, SupplierID FROM POSDB.Supplier");
-if($sql->num_rows){
-    $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
-    foreach($suppliers as $sup){
-        echo '<option value="',$sup['SupplierID'],'" id="selection">',$sup['CompanyName'],'</option>';
-    }
-}
-?>
+                            $sql = $db->query("SELECT CompanyName, SupplierID FROM POSDB.Supplier");
+                            if($sql->num_rows){
+                                $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+                                foreach($suppliers as $sup){
+                                    echo '<option value="',$sup['SupplierID'],'" id="selection">',$sup['CompanyName'],'</option>';
+                                }
+                            }
+                            ?>
                     </select>
                     <td>
                       <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
@@ -65,14 +65,14 @@ if($sql->num_rows){
                     <select name="selectedDeleteValue" class="form-control">
                       <option>Select a supplier to Delete</option>
                       <?php
-$sql = $db->query("SELECT CompanyName, SupplierID FROM POSDB.Supplier");
-if($sql->num_rows){
-    $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
-    foreach($suppliers as $sup){
-        echo '<option value="',$sup['SupplierID'],'" id="selection">',$sup['CompanyName'],'</option>';
-    }
-}
-?>
+                        $sql = $db->query("SELECT CompanyName, SupplierID FROM POSDB.Supplier");
+                        if($sql->num_rows){
+                            $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+                            foreach($suppliers as $sup){
+                                echo '<option value="',$sup['SupplierID'],'" id="selection">',$sup['CompanyName'],'</option>';
+                            }
+                        }
+                        ?>
                     </select>
                     <td>
                       <input type="submit" class="btn btn-primary" name="Delete" value="Delete" />
@@ -81,33 +81,29 @@ if($sql->num_rows){
               </table>
             </form>
             <?php
-if(isset($_POST['Delete'])){
-    $deletion = $_POST['selectedDeleteValue'];
-    echo "Deleted ";
-    echo $deletion;
-    //$delete = $db->exec("DELETE * FROM POSDB.Supplier Where SupplierID = $deletion");
-    $delete = $db->query("DELETE FROM POSDB.Supplier Where SupplierID = $deletion");
-    $result = mysql_query($delete);
-    //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
-    //header("Refresh:0");
-}
-?>
+                if(isset($_POST['Delete'])){
+                    $deletion = $_POST['selectedDeleteValue'];
+                    echo "Deleted ";
+                    echo $deletion;
+                    //$delete = $db->exec("DELETE * FROM POSDB.Supplier Where SupplierID = $deletion");
+                    $delete = $db->query("DELETE FROM POSDB.Supplier Where SupplierID = $deletion");
+                    $result = mysql_query($delete);
+                    //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
+                    //header("Refresh:0");
+                }
+                ?>
           </div>
+          <hr>
           <!--Create a Supplier-->
           <form action="" method="post">
             <p>
               <label for="firstName">First Name:</label>
               <input type="text" name="first_name" id="firstName">
-            </p>
-            <p>
               <label for="lastName">Last Name:</label>
               <input type="text" name="last_name" id="lastName">
-            </p>
-            <p>
               <label for="emailAddress">Email Address:</label>
               <input type="text" name="email" id="emailAddress">
-            </p>
-            <input type="submit" value="Create">
+            <input type="submit" value="Create" class="btn btn-primary">
           </form>
         </div>
 
@@ -131,24 +127,24 @@ if(isset($_POST['Delete'])){
           <!--Each tr is a row and td is a cell for each column-->
           <tbody>
             <?php
-$query = $db->query("SELECT * FROM POSDB.Supplier");
-if($count = $query->num_rows){
-    $rows = $query->fetch_all(MYSQLI_ASSOC);
-    foreach($rows as $row){
-        echo'<tr>';
-        echo'<td>', $row['SupplierID'],'</td>';
-        echo'<td>', $row['CompanyName'],'</td>';
-        echo'<td>', $row['Address'],'</td>';
-        echo'<td>', $row['City'],'</td>';
-        echo'<td>', $row['State'],'</td>';
-        echo'<td>', $row['PostalCode'],'</td>';
-        echo'<td>', $row['Country'],'</td>';
-        echo'<td>', $row['Phone'],'</td>';
-        echo'<td>', $row['ReStockLevel'],'</td>';
-        echo'<td>', $row['UnitCost'],'</td>';
-    }
-}
-?>
+                $query = $db->query("SELECT * FROM POSDB.Supplier");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo'<tr>';
+                        echo'<td>', $row['SupplierID'],'</td>';
+                        echo'<td>', $row['CompanyName'],'</td>';
+                        echo'<td>', $row['Address'],'</td>';
+                        echo'<td>', $row['City'],'</td>';
+                        echo'<td>', $row['State'],'</td>';
+                        echo'<td>', $row['PostalCode'],'</td>';
+                        echo'<td>', $row['Country'],'</td>';
+                        echo'<td>', $row['Phone'],'</td>';
+                        echo'<td>', $row['ReStockLevel'],'</td>';
+                        echo'<td>', $row['UnitCost'],'</td>';
+                    }
+                }
+                ?>
           </tbody>
         </table>
 
@@ -172,28 +168,28 @@ if($count = $query->num_rows){
           <!--Each tr is a row and td is a cell for each column-->
           <tbody>
             <?php
-if(isset($_POST['submit'])){
-    $selection = $_POST['selectedValue'];
-    echo "<script> showSupplier(); </script>";
-}
-$query = $db->query("SELECT * FROM POSDB.Supplier Where SupplierID = $selection");
-if($count = $query->num_rows){
-    $rows = $query->fetch_all(MYSQLI_ASSOC);
-    foreach($rows as $row){
-        echo'<tr>';
-        echo'<td>', $row['SupplierID'],'</td>';
-        echo'<td>', $row['CompanyName'],'</td>';
-        echo'<td>', $row['Address'],'</td>';
-        echo'<td>', $row['City'],'</td>';
-        echo'<td>', $row['State'],'</td>';
-        echo'<td>', $row['PostalCode'],'</td>';
-        echo'<td>', $row['Country'],'</td>';
-        echo'<td>', $row['Phone'],'</td>';
-        echo'<td>', $row['ReStockLevel'],'</td>';
-        echo'<td>', $row['UnitCost'],'</td>';
-    }
-}
-?>
+                if(isset($_POST['submit'])){
+                    $selection = $_POST['selectedValue'];
+                    echo "<script> showSupplier(); </script>";
+                }
+                $query = $db->query("SELECT * FROM POSDB.Supplier Where SupplierID = $selection");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo'<tr>';
+                        echo'<td>', $row['SupplierID'],'</td>';
+                        echo'<td>', $row['CompanyName'],'</td>';
+                        echo'<td>', $row['Address'],'</td>';
+                        echo'<td>', $row['City'],'</td>';
+                        echo'<td>', $row['State'],'</td>';
+                        echo'<td>', $row['PostalCode'],'</td>';
+                        echo'<td>', $row['Country'],'</td>';
+                        echo'<td>', $row['Phone'],'</td>';
+                        echo'<td>', $row['ReStockLevel'],'</td>';
+                        echo'<td>', $row['UnitCost'],'</td>';
+                    }
+                }
+                ?>
           </tbody>
         </table>
       </div>
