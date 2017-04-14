@@ -94,15 +94,28 @@ require 'database/connect.php';
                 ?>
           </div>
           <hr>
+          <h4>Add a Supplier:</h4>
           <!--Create a Supplier-->
           <form action="" method="post">
             <p>
-              <label for="firstName">First Name:</label>
-              <input type="text" name="first_name" id="firstName">
-              <label for="lastName">Last Name:</label>
-              <input type="text" name="last_name" id="lastName">
-              <label for="emailAddress">Email Address:</label>
-              <input type="text" name="email" id="emailAddress">
+              <label for="CompanyName">Company Name: </label>
+              <input type="text" name="CompanyName" id="CompanyName">
+              <label for="Address">Address: </label>
+              <input type="text" name="Address" id="Address">
+              <label for="City">City: </label>
+              <input type="text" name="City" id="City">
+              <label for="State">State: </label>
+              <input type="text" name="State" id="State">
+              <label for="PostalCode">Postal Code: </label>
+              <input type="text" name="PostalCode" id="PostalCode">
+              <label for="Country">Country: </label>
+              <input type="text" name="Country" id="Country">
+              <label for="Phone">Phone: </label>
+              <input type="text" name="Phone" id="Phone">
+              <label for="Re-StockLevel">Re-StockLevel: </label>
+              <input type="text" name="Re-StockLevel" id="Re-StockLevel">
+              <label for="UnitCost">Unit Cost: </label>
+              <input type="text" name="UnitCost" id="UnitCost">
             <input type="submit" value="Create" class="btn btn-primary">
           </form>
         </div>
