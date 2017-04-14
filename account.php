@@ -1,3 +1,6 @@
+<?php
+require 'database/connect.php';
+?>
 <html>
 <head>
     <title>Employee Account</title>
@@ -21,7 +24,7 @@
     <div class="container-fluid">
         <!--8 column width for the sales register container-->
         <div class="col-lg-8">
-            <h2>Employee Account</h2>
+            <h2>Personal Information</h2>
             <hr>
             <div class="well">
                 <div class="container">
@@ -37,6 +40,7 @@
                     <input type = "text" class = "form-control" placeholder = "Phone">
                     <input type = "text" class = "form-control" placeholder = "Email">    
                     </form>
+                    <button type="button" class="btn btn-primary" ;">Save</button>
                 </div>
                 </div> 
             </div>
@@ -54,6 +58,7 @@
                         <input type = "text" class = "form-control" placeholder = "Phone">
                         <input type = "text" class = "form-control" placeholder = "Email">    
                     </form>
+                    <button type="button" class="btn btn-primary" ;">Save</button>
                 </div> 
                 </div>
             </div>
