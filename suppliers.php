@@ -85,7 +85,6 @@ require 'database/connect.php';
                     $deletion = $_POST['selectedDeleteValue'];
                     echo "Deleted ";
                     echo $deletion;
-                    //$delete = $db->exec("DELETE * FROM POSDB.Supplier Where SupplierID = $deletion");
                     $delete = $db->query("DELETE FROM POSDB.Supplier Where SupplierID = $deletion");
                     $result = mysql_query($delete);
                     //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
@@ -98,6 +97,8 @@ require 'database/connect.php';
           <!--Create a Supplier-->
           <form action="" method="post">
             <p>
+            <label for="SupplierID">SupplierID: </label>
+              <input type="text" name="SupplierID" id="SupplierID">
               <label for="CompanyName">Company Name: </label>
               <input type="text" name="CompanyName" id="CompanyName">
               <label for="Address">Address: </label>
@@ -116,8 +117,26 @@ require 'database/connect.php';
               <input type="text" name="Re-StockLevel" id="Re-StockLevel">
               <label for="UnitCost">Unit Cost: </label>
               <input type="text" name="UnitCost" id="UnitCost">
-            <input type="submit" value="Create" class="btn btn-primary">
+            <input type="submit" name="Create" value="Create" class="btn btn-primary">
           </form>
+          <?php
+            if(isset($_POST['Create'])){
+                $sID = $_POST['SupplierID'];
+                $cName = $_POST['CompanyName'];
+                $address = $_POST['Address'];
+                $city = $_POST['City'];
+                $state = $_POST['State'];
+                $postalCode = $_POST['PostalCode'];
+                $country = $_POST['Country'];
+                $phone = $_POST['Phone'];
+                $reStockLevel = $_POST['Re-StockLevel'];
+                $unitCost = $_POST['UnitCost'];
+
+                $create = $db->query("INSERT INTO POSDB.Supplier (`SupplierID`, `CompanyName`, `Address`, `City`, `State`, `PostalCode`, `Country`, `Phone`, `ReStockLevel`, `UnitCost`) VALUES($sID, '$cName', '$address', '$city', '$state', '$postalCode', '$country', '$phone', $reStockLevel, $unitCost)");
+
+                $results = mysql_query($create);
+            }
+          ?>
         </div>
 
         <!-- Table for showing all Suppliers -->
