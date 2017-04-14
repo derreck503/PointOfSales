@@ -30,7 +30,11 @@ require 'database/connect.php';
                 <div class="container">
                 <div class="col-lg-4">
                     <form>
-                    <input type = "text" class = "form-control" placeholder = "First Name"> 
+                    <?php 
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" value = "',$row['FirstName'],'">';
+                    ?> 
                     <input type = "text" class = "form-control" placeholder = "Last Name"> 
                     <input type = "text" class = "form-control" placeholder = "Title"> 
                     <input type = "text" class = "form-control" placeholder = "DOB">
