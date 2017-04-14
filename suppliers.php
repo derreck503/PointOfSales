@@ -97,8 +97,6 @@ require 'database/connect.php';
           <!--Create a Supplier-->
           <form action="" method="post">
             <p>
-            <label for="SupplierID">SupplierID: </label>
-              <input type="text" name="SupplierID" id="SupplierID">
               <label for="CompanyName">Company Name: </label>
               <input type="text" name="CompanyName" id="CompanyName">
               <label for="Address">Address: </label>
@@ -121,7 +119,6 @@ require 'database/connect.php';
           </form>
           <?php
             if(isset($_POST['Create'])){
-                $sID = $_POST['SupplierID'];
                 $cName = $_POST['CompanyName'];
                 $address = $_POST['Address'];
                 $city = $_POST['City'];
