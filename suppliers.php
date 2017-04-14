@@ -33,107 +33,119 @@ require 'database/connect.php';
           <!--Select Supplier from dropdown-->
           <div class="dropdown form-group">
             <label for="selectSupplier">Select Supplier from dropdown:</label>
-            <select class="form-control" id="selectProduct" onChange="showSupplier(this.value);">
-            <option selected>Select a Supplier</option>
-       <?php
-            $sql = $db->query("SELECT CompanyName,SupplierID FROM POSDB.Supplier");
-            if($sql->num_rows){
-                $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
-                foreach($suppliers as $sup){
-                echo '<option value="',$sup['SupplierID'],'">',$sup['CompanyName'],'</option>';
-            }
-            }
-        ?>
-
-            </select>
+            <form action="" method="post" name="myForm" id="myForm">
+              <table>
+                <tr>
+                  <td>
+                    <select name="selectedValue" class="form-control">
+                      <?php
+                        $sql = $db->query("SELECT CompanyName, SupplierID FROM POSDB.Supplier");
+                        if($sql->num_rows){
+                            $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+                            foreach($suppliers as $sup){
+                                echo '<option value="',$sup['SupplierID'],'" id="selection">',$sup['CompanyName'],'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="submit" name="submit" value="Submit"/>
+                  </td>
+                </tr>
+              </table>
+            </form>
           </div>
         </div>
 
-        <!-- Table for showing all Suppliers -->
-        <table class="table table-bordered table-condensed" id="showAllSuppliers" style="display:none">
-          <!--Head means title columns-->
-          <thead>
-            <tr>
-              <th>SupplierID</th>
-              <th>Company Name</th>
-              <th>Address</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Postal Code</th>
-              <th>Country</th>
-              <th>Phone</th>
-              <th>Re-StockLevel</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <!--Each tr is a row and td is a cell for each column-->
-          <tbody>
-            <?php
-$query = $db->query("SELECT * FROM POSDB.Supplier");
-if($count = $query->num_rows){
-    $rows = $query->fetch_all(MYSQLI_ASSOC);
-    foreach($rows as $row){
-        echo'<tr>';
-        echo'<td>', $row['SupplierID'],'</td>';
-        echo'<td>', $row['CompanyName'],'</td>';
-        echo'<td>', $row['Address'],'</td>';
-        echo'<td>', $row['City'],'</td>';
-        echo'<td>', $row['State'],'</td>';
-        echo'<td>', $row['PostalCode'],'</td>';
-        echo'<td>', $row['Country'],'</td>';
-        echo'<td>', $row['Phone'],'</td>';
-        echo'<td>', $row['ReStockLevel'],'</td>';
-        echo'<td>', $row['UnitCost'],'</td>';
-        echo'</tr>';
-    }
-}
-?>
-          </tbody>
-        </table>
+          <!-- Table for showing all Suppliers -->
+          <table class="table table-bordered table-condensed" id="showAllSuppliers" style="display:none">
+            <!--Head means title columns-->
+            <thead>
+              <tr>
+                <th>SupplierID</th>
+                <th>Company Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Phone</th>
+                <th>Re-StockLevel</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <!--Each tr is a row and td is a cell for each column-->
+            <tbody>
+              <?php
+                $query = $db->query("SELECT * FROM POSDB.Supplier");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo'<tr>';
+                        echo'<td>', $row['SupplierID'],'</td>';
+                        echo'<td>', $row['CompanyName'],'</td>';
+                        echo'<td>', $row['Address'],'</td>';
+                        echo'<td>', $row['City'],'</td>';
+                        echo'<td>', $row['State'],'</td>';
+                        echo'<td>', $row['PostalCode'],'</td>';
+                        echo'<td>', $row['Country'],'</td>';
+                        echo'<td>', $row['Phone'],'</td>';
+                        echo'<td>', $row['ReStockLevel'],'</td>';
+                        echo'<td>', $row['UnitCost'],'</td>';
+                    }
+                }
+                ?>
+            </tbody>
+          </table>
 
-<!--Table for showing certain supplier -->
-        <table class="table table-bordered table-condensed" id="showSupplier" style="display:none">
-          <!--Head means title columns-->
-          <thead>
-            <tr>
-              <th>SupplierID</th>
-              <th>Company Name</th>
-              <th>Address</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Postal Code</th>
-              <th>Country</th>
-              <th>Phone</th>
-              <th>Re-StockLevel</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <!--Each tr is a row and td is a cell for each column-->
-          <tbody>
-            <?php
-$query = $db->query("SELECT * FROM POSDB.Supplier");
-if($count = $query->num_rows){
-    $rows = $query->fetch_all(MYSQLI_ASSOC);
-    foreach($rows as $row){
-        echo'<tr>';
-        echo'<td>', $row['SupplierID'],'</td>';
-        echo'<td>', $row['CompanyName'],'</td>';
-        echo'<td>', $row['Address'],'</td>';
-        echo'<td>', $row['City'],'</td>';
-        echo'<td>', $row['State'],'</td>';
-        echo'<td>', $row['PostalCode'],'</td>';
-        echo'<td>', $row['Country'],'</td>';
-        echo'<td>', $row['Phone'],'</td>';
-        echo'<td>', $row['ReStockLevel'],'</td>';
-        echo'<td>', $row['UnitCost'],'</td>';
-        echo'</tr>';
-    }
-}
-?>
-          </tbody>
-        </table>
+          <!--Table for showing certain supplier -->
+          <table class="table table-bordered table-condensed" id="showSupplier" style="display:none">
+            <!--Head means title columns-->
+            <thead>
+              <tr>
+                <th>SupplierID</th>
+                <th>Company Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Phone</th>
+                <th>Re-StockLevel</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <!--Each tr is a row and td is a cell for each column-->
+            <tbody>
+              <?php
+                if(isset($_POST['submit'])){
+                    $selection = $_POST['selectedValue'];
+                    echo "<script> showSupplier(); </script>"; 
+                }
+                $query = $db->query("SELECT * FROM POSDB.Supplier Where SupplierID = $selection");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo'<tr>';
+                        echo'<td>', $row['SupplierID'],'</td>';
+                        echo'<td>', $row['CompanyName'],'</td>';
+                        echo'<td>', $row['Address'],'</td>';
+                        echo'<td>', $row['City'],'</td>';
+                        echo'<td>', $row['State'],'</td>';
+                        echo'<td>', $row['PostalCode'],'</td>';
+                        echo'<td>', $row['Country'],'</td>';
+                        echo'<td>', $row['Phone'],'</td>';
+                        echo'<td>', $row['ReStockLevel'],'</td>';
+                        echo'<td>', $row['UnitCost'],'</td>';
+                    }
+                }
+                ?>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
   </body>
 
   </html>

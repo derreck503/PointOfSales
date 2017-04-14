@@ -1,10 +1,5 @@
-function showSupplier(supplierID) {
+function showSupplier() {
     console.log("Show supplier function entered");
-    console.log(SupplierID);
-    if (document.getElementById("showSupplier").style.display == "block") {
-        document.getElementById("showSupplier").style.display = "none";
-
-    } else {
+        document.getElementById("showAllSuppliers").style.display = "none"
         document.getElementById("showSupplier").style.display = "block";
-    }
 }
