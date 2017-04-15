@@ -1,3 +1,6 @@
+<?php
+require 'database/connect.php';
+?>
 <html>
 
 <head>
@@ -27,14 +30,62 @@
             <hr>
             <!--search bar-->
             <div class="well">
+            <!--Show All Button-->
                 <button type="button" class="btn btn-primary" onclick="showAllCustomersTable();">Show all Customers</button>
-                <form role="form">
-                    <input type="text" class="form-control" placeholder="Search for customer">
-                    <button type="button" class="btn btn-primary">Search</button>
+                <!--Search for customer -->
+                <form action="" method="post" name="myForm" id="myForm">
+                    <input type="text" class="form-control" name ="customerName" placeholder="Search for customer">
+                    <input type="submit" class="btn btn-primary" name="search"></button>
                 </form>
             </div>
+            <!--Table for searched Customer-->
+            <table class="table table-bordered table-condensed" id="showAllCustomerResults" style="display:block">
+                <!--Head means title columns-->
+                <thead>
+                    <tr>
+                        <th>CustomerID</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Postal</th>
+                        <th>Country</th>
+                        <th>Phone #</th>
+                        <th>Email</th>
+                        <th>Club Member</th>
+                    </tr>
+                </thead>
+                <!--Each tr is a row and td is a cell for each column-->
+                <tbody>
+                    <?php
+                        if(isset($_POST['search'])){
+                        $searchValue = $_POST['customerName'];
+                        echo "customer Name: ";
+                        echo $searchValue;
+                        }
+                        $query1 = $db->query("SELECT * FROM POSDB.Customer WHERE FirstName = '$searchValue'");
+                        if($counts = $query1->num_rows){
+                            $rows1 = $query1->fetch_all(MYSQLI_ASSOC);
+                            foreach($rows1 as $row1){
+                                echo'<tr>';
+                                echo'<td>', $row1['CustomerID'],'</td>';
+                                echo'<td>', $row1['LastName'],'</td>';
+                                echo'<td>', $row1['FirstName'],'</td>';
+                                echo'<td>', $row1['Address'],'</td>';
+                                echo'<td>', $row1['City'],'</td>';
+                                echo'<td>', $row1['PostalCode'],'</td>';
+                                echo'<td>', $row1['Country'],'</td>';
+                                echo'<td>', $row1['Phone'],'</td>';
+                                echo'<td>', $row1['Email'],'</td>';
+                                echo'<td>', $row1['Membership'],'</td>';
+                                echo'</tr>';
+                            }
+                        }
+                ?>
+                </tbody>
+            </table>
 
-            <!-- table of search results -->
+            <!-- table of all Customers -->
             <table class="table table-bordered table-condensed" id="showAllCustomerResults" style="display:none">
                 <!--Head means title columns-->
                 <thead>
@@ -61,6 +112,14 @@
                         echo'<tr>';
                         echo'<td>', $row1['CustomerID'],'</td>';
                         echo'<td>', $row1['LastName'],'</td>';
+                        echo'<td>', $row1['FirstName'],'</td>';
+                        echo'<td>', $row1['Address'],'</td>';
+                        echo'<td>', $row1['City'],'</td>';
+                        echo'<td>', $row1['PostalCode'],'</td>';
+                        echo'<td>', $row1['Country'],'</td>';
+                        echo'<td>', $row1['Phone'],'</td>';
+                        echo'<td>', $row1['Email'],'</td>';
+                        echo'<td>', $row1['Membership'],'</td>';
                         echo'</tr>';
                     }
                 }
