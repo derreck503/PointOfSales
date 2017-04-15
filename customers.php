@@ -81,19 +81,36 @@ require 'database/connect.php';
           ?>
             <hr>
             <!--Delete a customer-->
-            <h4>Delete a Customer:</h4>
-            <form action="" method="post">
-              <label for="DeleteFirstName">First Name: </label>
-              <input type="text" name="DeleteFirstName" id="DeleteFirstName">
-                <input type="submit" name="Delete" value="Delete" class="btn btn-primary">
+            <div class="dropdown form-group">
+            <form action="" method="post" name="myForm" id="myForm">
+              <table>
+                <tr>
+                  <td>
+                    <select name="selectedDeleteValue" class="form-control">
+                      <option>Select a Customer to Delete</option>
+                      <?php
+                        $sql = $db->query("SELECT FirstName, LastName, CustomerID FROM POSDB.Customer");
+                        if($sql->num_rows){
+                            $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+                            foreach($suppliers as $sup){
+                               echo '<option value="',$sup['CustomerID'],'" id="selection">',$sup['FirstName'],' ', $sup['LastName'],'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                    <td>
+                      <input type="submit" class="btn btn-primary" name="Delete" value="Delete" />
+                    </td>
+                </tr>
+              </table>
             </form>
   
             <?php
                 if(isset($_POST['Delete'])){
-                    $deletion = $_POST['DeleteFirstName'];
+                    $deletion = $_POST['selectedDeleteValue'];
                     echo "Deleted ";
                     echo $deletion;
-                    $delete = $db->query("DELETE FROM POSDB.Customer Where FirstName = '$deletion'");
+                    $delete = $db->query("DELETE FROM POSDB.Customer Where CustomerID = $deletion");
                     $result = mysql_query($delete);
                     //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
                     //header("Refresh:0");
