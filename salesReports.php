@@ -92,7 +92,7 @@ require 'database/connect.php';
                     </div>
 
                     <!-- Sales Chart -->
-                    <div id="sales-chart" class="ct-chart ct-double-octave"></div>
+                    <div id="sales-chart" class="ct-chart ct-major-tenth"></div>
                 </div>
             </div><!--end tab 1-->
             <!-- tab 2 -->

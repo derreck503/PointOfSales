@@ -68,6 +68,14 @@ body {
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #FFF;
 }
+
+.ct-label {
+    font-size: 1.4rem;
+    color: #000000;
+}
+.ct-bar {
+    stroke-width: 30px;
+}
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
         color: #777;
