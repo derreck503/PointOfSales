@@ -31,7 +31,7 @@ require 'database/connect.php';
             <!--tabs navigation-->
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#report1">Sales</a></li>
-              <li><a data-toggle="tab" href="#report2">Memberships</a></li>
+              <li><a data-toggle="tab" href="#report2">Products</a></li>
               <li><a href="#">Menu 2</a></li>
               <li><a href="#">Menu 3</a></li>
             </ul>
@@ -42,38 +42,117 @@ require 'database/connect.php';
             <!-- tab 1 -->
             <div id="report1" class="tab-pane fade in active">
                 <div class="panel panel-default">
-                    <h2>Sales per Year ($)</h2>
-                    <form action="" method="post">
-                        <select class="form-control" name="Year" style="width:100px;">
-                            <option selected value="2017">2017</option>
-                            <option>2016</option>
-                        </select>
-                        <input value="Update" class="btn btn-primary">
-                    </form>
+                    <h2>Sales per Year (
+                        <?php
+                            $year = 2017;
+                            if(isset($_POST['salessubmit'])){
+                            $year = $_POST['selectedValueSales'];
+                            } 
+                            echo $year;
+                        ?>
+                    )</h2>
+                    <!-- dropdown menu for Sales -->
+                    <div class="dropdown form-group">
+                        <form action="" method="post" name="myForm" id="myForm">
+                          <table>
+                            <tr>
+                              <td>
+                                <select name="selectedValueSales" class="form-control">
+                                  <option>Select Year</option>
+                                    <?php
+                                        $sql = $db->query("SELECT SaleDate FROM POSDB.Sale ORDER BY SaleDate DESC");
+                                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                                        $currentYear = substr($row['SaleDate'],0,4);
+                                        $sql = $db->query("SELECT SaleDate FROM POSDB.Sale ORDER BY SaleDate ASC");
+                                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                                        $oldestYear = substr($row['SaleDate'],0,4);
+                                        echo '<option value="',$currentYear,'" id="selection">',$currentYear,'</option>';
+                                        $testYear = $currentYear-1;
+                                        while($testYear>$oldestYear){
+                                            $sql = $db->query("SELECT SaleDate FROM POSDB.Sale WHERE SaleDate LIKE '".$testYear."%'");
+                                            $row = $sql->fetch_array(MYSQLI_ASSOC);
+                                            $currentYear=$row['SaleDate'];
+                                            if(!is_null($currentYear))
+                                            {
+                                                $currentYear=substr($row['SaleDate'],0,4);
+                                                echo '<option value="',$currentYear,'" id="selection">',$currentYear,'</option>';
+                                            }
+                                            $currentYear = $testYear;
+                                            $testYear = $currentYear-1;
+                                        };
+                                        echo '<option value="',$oldestYear,'" id="selection">',$oldestYear,'</option>';
+                                    ?>
+                                </select>
+                                <td>
+                                  <input type="submit" class="btn btn-primary" name="salessubmit" value="Submit" />
+                                </td>
+                            </tr>
+                          </table>
+                        </form>
+                    </div>
+
+                    <!-- Sales Chart -->
                     <div id="sales-chart" class="ct-chart ct-double-octave"></div>
                 </div>
             </div><!--end tab 1-->
             <!-- tab 2 -->
             <div id="report2" class="tab-pane fade in">
                 <div class="panel panel-default">
-                    <h2>Memberships Per Year</h2>
-                    <div class="form-group">
-                        <select style="width:100px;" class="form-control">
-                            <option value="volvo">2017</option>
-                            <option value="saab">2016</option>
-                        </select>
-                    </div>
-                    <div id="customer-chart" class="ct-chart ct-double-octave"></div>
+                    <h2>Products by Sales</h2>
+                    <hr>
+                    <?php 
+                        $sql = $db->query("SELECT ProductName FROM POSDB.Product GROUP BY ProductName");
+                        if($sql->num_rows){
+                            $products = $sql->fetch_all(MYSQLI_ASSOC);
+                        }
+                        $productsArray = array();
+                        $data = array();
+                        foreach($products as $product){
+                            $productTotalSales = 0;
+
+                            $sql = $db->query("SELECT ProductID FROM POSDB.Product WHERE ProductName='".$product['ProductName']."'");
+                            $productIDs = $sql->fetch_all(MYSQLI_ASSOC);
+                            foreach($productIDs as $prID)
+                            {
+                                $sql = $db->query("SELECT SUM(SaleTotal) as sales FROM POSDB.Sale WHERE ProductID='".$prID['ProductID']."'");
+                                $row = $sql->fetch_array(MYSQLI_ASSOC);
+                                $productSale = $row['sales'];
+                                $productTotalSales = $productTotalSales + $productSale;
+                            }
+                            $tempArray = array($product['ProductName'],$productTotalSales);
+                            array_push($productsArray,$tempArray);
+                        }
+                        $result = $productsArray[0][1];
+                        $index = 0;
+                        for($i=0;$i<sizeof($productsArray);$i++)
+                        {
+                            if($productsArray[$i][1]>$result)
+                            {
+                                $result = $productsArray[$i][1];
+                                $index = $i;
+                            }
+                        }
+                        echo "<div class=\"well productreport\">Best Selling Product ",$productsArray[$index][0]," : ",$productsArray[$index][1],"</div>";
+                        for($i=0;$i<sizeof($productsArray);$i++)
+                        {
+                            echo "<div class=\"well productreport\">",$productsArray[$i][0]," : ",$productsArray[$i][1],"</div>";
+                        }
+
+                    ?>
+                    <!--<div id="customer-chart" class="ct-chart ct-double-octave"></div>-->
                 </div>
             </div><!--end tab 2-->
             </div> <!--end tab content-->
 
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <!-- PHP code for the Sales Chart -->
     <?php
         $year = 2017;
+        if(isset($_POST['salessubmit'])){
+        $year = $_POST['selectedValueSales'];
+        }
 
         $startDates = array();
         $endDates = array();
@@ -116,7 +195,6 @@ require 'database/connect.php';
                 array_push($chartValues,$value);
         }
     ?>
-
     <script>
         //Define chart data
 
@@ -137,12 +215,12 @@ require 'database/connect.php';
         //Create charts
 
         new Chartist.Bar('#sales-chart', salesData);
-        new Chartist.Bar('#customer-chart', customerData);
+        //new Chartist.Bar('#customer-chart', customerData);
 
         //Needed for when new tabs are selected, so the charts can resize
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             new Chartist.Bar('#sales-chart', salesData);
-            new Chartist.Bar('#customer-chart', customerData);
+            //new Chartist.Bar('#customer-chart', customerData);
         });
 
     </script>
