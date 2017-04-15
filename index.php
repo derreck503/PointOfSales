@@ -53,7 +53,7 @@ session_start();
   <div class="container" style="text-align: center; margin-top: 250px; width: 80%;">
     <!--Title banner-->
     <div class="jumbotron" style="background-color:aliceblue;">
-      <h1>Welcome to Babies R Us</h1>
+      <h1>Welcome to NewBorn Outlet</h1>
       <p>The leading point of sales system for a baby store.</p>
     </div>
     <!--Login button-->
