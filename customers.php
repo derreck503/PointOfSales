@@ -39,8 +39,8 @@ require 'database/connect.php';
                     <input type="text" class="form-control" name ="customerName" placeholder="Search for customer">
                     <input type="submit" class="btn btn-primary" name="search"></button>
                 </form>
-            </div>
-
+                <hr>
+            <h4>Add a Customer:</h4>
             <!--Add a customer-->
             <form action="" method="post">
               <label for="LastName">Last Name: </label>
@@ -74,14 +74,32 @@ require 'database/connect.php';
                 $phone = $_POST['Phone'];
                 $email = $_POST['Email'];
                 $membership = $_POST['Membership'];
-                
+
                 $create = $db->query("INSERT INTO POSDB.Customer (`CustomerID`, `LastName`, `FirstName`, `Address`, `City`, `PostalCode`, `Country`, `Phone`, `Email`, `Membership`) VALUES (0, '$LName', '$FName','$address', '$city', '$postalCode', '$country', '$phone', '$email', $membership)");
                 $results = mysql_query($create);
             }
           ?>
-        </div>
-
+            <hr>
             <!--Delete a customer-->
+            <h4>Delete a Customer:</h4>
+            <form action="" method="post">
+              <label for="DeleteFirstName">First Name: </label>
+              <input type="text" name="DeleteFirstName" id="DeleteFirstName">
+                <input type="submit" name="Delete" value="Delete" class="btn btn-primary">
+            </form>
+  
+            <?php
+                if(isset($_POST['Delete'])){
+                    $deletion = $_POST['DeleteFirstName'];
+                    echo "Deleted ";
+                    echo $deletion;
+                    $delete = $db->query("DELETE FROM POSDB.Customer Where FirstName = '$deletion'");
+                    $result = mysql_query($delete);
+                    //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
+                    //header("Refresh:0");
+                }
+                ?>
+            </div>
 
             <!-- table of all Customers -->
             <table class="table table-bordered table-condensed" id="showAllCustomerResults" style="display:none">
