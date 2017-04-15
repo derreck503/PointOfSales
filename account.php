@@ -24,11 +24,11 @@ require 'database/connect.php';
     <!--Table for report-->
     <div class="container-fluid">
         <!--8 column width for the sales register container-->
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             
         <h2>Personal Information</h2>
             <hr>
-            <div class="well">
+            <!-- <div class="well">
                 <div class="container">
                 <div class="col-lg-4">
                     <form>
@@ -91,7 +91,7 @@ require 'database/connect.php';
                 </div>
                 </div> 
             </div>
-            <div class = "clearfix"></div>
+            <div class = "clearfix"></div> -->
             <div class="well">
                 <div class="container">
                 <div class="col-lg-4">
@@ -150,8 +150,10 @@ require 'database/connect.php';
                 </div> 
                 </div>
             </div>
+            </div>
 
-            <h2>Update Employee Information</h2>
+            <div class="col-lg-6">
+            <h2>Admin Tool: Update Employee Information</h2>
             <hr>
             <div class="well">
 
@@ -196,16 +198,6 @@ require 'database/connect.php';
             </form>
           </div>
         </div>
-
-
-        </div>
-           
-
-        <!--4 column width for the whole customer details, etc..container-->
-        <div class="col-lg-4">
-            <div class="well">
-            <h2>Customer Details:</h2>
-            </div>
         </div>
 
     </div>
