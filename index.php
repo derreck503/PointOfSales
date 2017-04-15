@@ -1,3 +1,36 @@
+<?php
+require 'database/connect.php';
+session_start();
+
+
+  if(isset($_POST["Log"])) {
+
+    $username=$_POST['username'];
+    $password=$_POST['password'];
+
+
+   $sql = $db->query("SELECT Username, Password, UserID FROM POSDB.Login");
+    if($sql->num_rows){
+    $Logins = $sql->fetch_all(MYSQLI_ASSOC);
+    foreach($Logins as $Users){
+      if ($Users['Username'] == $username && $Users['Password'] == $password) {
+        $_SESSION['Identifier'] = $Users['UserID'];
+        header('Location: dashboard.php');
+        
+        }
+    }
+            echo "Invalid Username or Password";
+       
+  }
+
+
+  }
+
+?>
+
+
+  
+
 <!DOCTYPE html>
 <html>
 
@@ -20,7 +53,7 @@
   <div class="container" style="text-align: center; margin-top: 250px; width: 80%;">
     <!--Title banner-->
     <div class="jumbotron" style="background-color:aliceblue;">
-      <h1>Welcome to Babies R Us</h1>
+      <h1>Welcome to NewBorn Outlet</h1>
       <p>The leading point of sales system for a baby store.</p>
     </div>
     <!--Login button-->
@@ -36,18 +69,18 @@
           </div>
           <!--Body inside of button-->
           <div class="modal-body">
-            <form role="form">
+            <form role="form" action="" method="post">
               <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="username" class="form-control" placeholder="Username" name='username'>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" name='password'>
               </div>
-            </form>
-          </div>
+              </div>
           <!--Footer inside of button-->
           <div class="modal-footer">
-            <a href="dashboard.html"><button class="btn btn-primary btn-block">Log In</button></a>
+           <button class="btn btn-primary btn-block" type="submit" name="Log" >Log In</button>
+           </form>
           </div>
         </div>
       </div>

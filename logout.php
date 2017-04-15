@@ -1,3 +1,29 @@
+<?php
+require 'database/connect.php';
+
+
+  if(isset($_POST["Log"])) {
+
+    $username=$_POST['username'];
+    $password=$_POST['password'];
+
+   $sql = $db->query("SELECT Username, Password FROM POSDB.Login");
+    if($sql->num_rows){
+    $Logins = $sql->fetch_all(MYSQLI_ASSOC);
+    foreach($Logins as $Users){
+      if ($Users['Username'] == $username && $Users['Password'] == $password) {
+        header('Location: dashboard.php');
+        }
+    }
+            echo "Invalid Username or Password";
+       
+  }
+  }
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -30,24 +56,24 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <!--Header inside of button-->
-          <div class="modal-header">
+                    <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3 class="modal-title">Log In</h3>
           </div>
           <!--Body inside of button-->
           <div class="modal-body">
-            <form role="form">
+            <form role="form" action="" method="post">
               <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="username" class="form-control" placeholder="Username" name='username'>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" name='password'>
               </div>
-            </form>
-          </div>
+              </div>
           <!--Footer inside of button-->
           <div class="modal-footer">
-            <a href="dashboard.html"><button class="btn btn-primary btn-block">Log In</button></a>
+           <button class="btn btn-primary btn-block" type="submit" name="Log" >Log In</button>
+           </form>
           </div>
         </div>
       </div>
@@ -57,3 +83,5 @@
 </body>
 
 </html>
+
+
