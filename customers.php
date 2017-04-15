@@ -41,6 +41,48 @@ require 'database/connect.php';
                 </form>
             </div>
 
+            <!--Add a customer-->
+            <form action="" method="post">
+              <label for="LastName">Last Name: </label>
+              <input type="text" name="LastName" id="LastName">
+              <label for="FirstName">First Name: </label>
+              <input type="text" name="FirstName" id="FirstName">
+              <label for="Address">Address: </label>
+              <input type="text" name="Address" id="Address">
+              <label for="City">City: </label>
+              <input type="text" name="City" id="City">
+              <label for="PostalCode">Postal Code: </label>
+              <input type="text" name="PostalCode" id="PostalCode">
+              <label for="Country">Country: </label>
+              <input type="text" name="Country" id="Country">
+              <label for="Phone">Phone: </label>
+              <input type="text" name="Phone" id="Phone">
+              <label for="Email">Email: </label>
+              <input type="text" name="Email" id="Email">
+              <label for="Membership">Membership: </label>
+              <input type="text" name="Membership" id="Membership">
+            <input type="submit" name="Create" value="Create" class="btn btn-primary">
+          </form>
+          <?php
+            if(isset($_POST['Create'])){
+                $LName = $_POST['LastName'];
+                $FName = $_POST['FirstName'];
+                $address = $_POST['Address'];
+                $city = $_POST['City'];
+                $postalCode = $_POST['PostalCode'];
+                $country = $_POST['Country'];
+                $phone = $_POST['Phone'];
+                $email = $_POST['Email'];
+                $membership = $_POST['Membership'];
+                
+                $create = $db->query("INSERT INTO POSDB.Customer (`CustomerID`, `LastName`, `FirstName`, `Address`, `City`, `PostalCode`, `Country`, `Phone`, `Email`, `Membership`) VALUES (0, '$LName', '$FName','$address', '$city', '$postalCode', '$country', '$phone', '$email', $membership)");
+                $results = mysql_query($create);
+            }
+          ?>
+        </div>
+
+            <!--Delete a customer-->
+
             <!-- table of all Customers -->
             <table class="table table-bordered table-condensed" id="showAllCustomerResults" style="display:none">
                 <!--Head means title columns-->
