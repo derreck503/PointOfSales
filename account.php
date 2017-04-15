@@ -15,6 +15,7 @@ require 'database/connect.php';
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/loadNavBar.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/showEmployee.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,8 @@ require 'database/connect.php';
     <div class="container-fluid">
         <!--8 column width for the sales register container-->
         <div class="col-lg-8">
-            <h2>Personal Information</h2>
+            
+        <h2>Personal Information</h2>
             <hr>
             <div class="well">
                 <div class="container">
@@ -33,18 +35,59 @@ require 'database/connect.php';
                     <?php 
                         $sql = $db->query("SELECT * FROM POSDB.Employee");
                         $row = $sql->fetch_array(MYSQLI_ASSOC);
-                        echo '<input type = "text" class = "form-control" value = "',$row['FirstName'],'">';
+                        echo '<input type = "text" class = "form-control" name="FirstName" value = "',$row['FirstName'],'">';
                     ?> 
-                    <input type = "text" class = "form-control" placeholder = "Last Name"> 
-                    <input type = "text" class = "form-control" placeholder = "Title"> 
-                    <input type = "text" class = "form-control" placeholder = "DOB">
-                    <input type = "text" class = "form-control" placeholder = "Address">
-                    <input type = "text" class = "form-control" placeholder = "City">
-                    <input type = "text" class = "form-control" placeholder = "Postal Code"> 
-                    <input type = "text" class = "form-control" placeholder = "Phone">
-                    <input type = "text" class = "form-control" placeholder = "Email">    
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="LastName" value = "',$row['LastName'],'">';
+                    ?> 
+
+                   <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="Title" value = "',$row['Title'],'">';
+                    ?> 
+                    
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="DOB" value = "',$row['DOB'],'">';
+                    ?> 
+
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="Address" value = "',$row['Address'],'">';
+                    ?> 
+
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="City" value = "',$row['City'],'">';
+                    ?> 
+
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="PostalCode" value = "',$row['PostalCode'],'">';
+                    ?> 
+
+                  
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="Phone" value = "',$row['Phone'],'">';
+                    ?> 
+ 
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="Email" value = "',$row['Email'],'">';
+                    ?> 
+                     <input type="submit" name="Update" value="Update" class="btn btn-primary">
                     </form>
-                    <button type="button" class="btn btn-primary" ;">Save</button>
+                    
                 </div>
                 </div> 
             </div>
@@ -53,19 +96,108 @@ require 'database/connect.php';
                 <div class="container">
                 <div class="col-lg-4">
                     <form>
-                        <input type = "text" class = "form-control" placeholder = "First Name"> 
-                        <input type = "text" class = "form-control" placeholder = "Last Name"> 
-                        <input type = "text" class = "form-control" placeholder = "DOB">
-                        <input type = "text" class = "form-control" placeholder = "Address">
-                        <input type = "text" class = "form-control" placeholder = "City">
-                        <input type = "text" class = "form-control" placeholder = "Postal Code"> 
-                        <input type = "text" class = "form-control" placeholder = "Phone">
-                        <input type = "text" class = "form-control" placeholder = "Email">    
+                        <?php 
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="FirstName" value = "',$row['FirstName'],'">';
+                    ?> 
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="LastName" value = "',$row['LastName'],'">';
+                    ?> 
+                    
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="DOB" value = "',$row['DOB'],'">';
+                    ?> 
+
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="Address" value = "',$row['Address'],'">';
+                    ?> 
+
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="City" value = "',$row['City'],'">';
+                    ?> 
+
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="PostalCode" value = "',$row['PostalCode'],'">';
+                    ?> 
+
+                  
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="Phone" value = "',$row['Phone'],'">';
+                    ?> 
+ 
+                    <?php
+                        $sql = $db->query("SELECT * FROM POSDB.Employee");
+                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                        echo '<input type = "text" class = "form-control" name="Email" value = "',$row['Email'],'">';
+                    ?> 
+                     <input type="submit" name="Update" value="Update" class="btn btn-primary">
+                         
                     </form>
-                    <button type="button" class="btn btn-primary" ;">Save</button>
+                    
                 </div> 
                 </div>
             </div>
+
+            <h2>Update Employee Information</h2>
+            <hr>
+            <div class="well">
+
+           <!--Select Employee from dropdown-->
+          <div class="dropdown form-group">
+            <form action="" method="post" name="myForm" id="myForm">
+              <table>
+                <tr>
+                  <td>
+                    <select name="selectedValue" class="form-control">
+                      <option>Select an employee</option>
+                      <?php
+                            $sql = $db->query("SELECT FirstName, LastName, EmployeeID FROM POSDB.Employee");
+                            if($sql->num_rows){
+                                $employees = $sql->fetch_all(MYSQLI_ASSOC);
+                                foreach($employees as $sup){
+                                    echo '<option value="',$sup['EmployeeID'],'" id="selection">',$sup['FirstName'],' ',$sup['LastName'], '</option>';
+                                }
+                            }
+                            ?>
+                    </select>
+                    <td>
+                      <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
+                    </td>
+                </tr>
+              </table>
+            </form>
+            <form id="showEmployee" style="display:none">
+                <?php
+                if(isset($_POST['submit'])){
+                    $selection = $_POST['selectedValue'];
+                    echo "<script> showEmployee(); </script>";
+                }
+                $query = $db->query("SELECT * FROM POSDB.Employee Where EmployeeID = $selection");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo '<input type = "text" class = "form-control" name="FirstName" value = "',$row['FirstName'],'">';
+                    }
+                }
+                ?>
+            </form>
+          </div>
+        </div>
+
+
         </div>
            
 
