@@ -16,6 +16,8 @@ require 'database/connect.php';
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/loadNavBar.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/showAllSales.js"></script>
+    <script src="js/showEmployeeSales.js"></script>
 </head>
 
 <body>
@@ -29,59 +31,114 @@ require 'database/connect.php';
         <hr>
             <!--search bar-->
             <div class="well">
-                <form role="form">
-                    <div class="row">
-                    <div class="col-lg-2">
-                        <div class="form-group" >
-                            <label for="sel1">Filter by:</label>
-                            <select class="form-control" id="sel1">
-                            <option>Product</option>
-                            <option>Customer</option>
-                            <option>Employee</option>
-                            <option>Date</option>
-                            </select>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-lg-4">
-                    <input type="text" class="form-control" placeholder="Search for sale">
-                    </div>
-                    </div>
-                    <br>
-                    <button type="button" class="btn btn-primary">Search</button>
+                <!--Show All Button-->
+                <button type="button" class="btn btn-primary" onclick="showAll();">Show all Sales</button>
+                <hr>
+                <!--Show sales by employee-->
+                <div class="dropdown form-group">
+                <form action="" method="post" name="myForm" id="myForm">
+                <table>
+                    <tr>
+                    <td>
+                        <select name="selectedValue" class="form-control">
+                        <option>Select an Employee</option>
+                        <?php
+                                $sql = $db->query("SELECT EmployeeID, FirstName, LastName FROM POSDB.Employee");
+                                if($sql->num_rows){
+                                    $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+                                    foreach($suppliers as $sup){
+                                        echo '<option value="',$sup['EmployeeID'],'" id="selection">',$sup['FirstName'],' ',$sup['LastName'],'</option>';
+                                    }
+                                }
+                                ?>
+                        </select>
+                        <td>
+                        <input type="submit" class="btn btn-primary" name="submit" value="Show" />
+                        </td>
+                    </tr>
+                </table>
                 </form>
             </div>
+            <hr>
 
-            <!-- table of search results -->
-            <table class="table table-bordered table-condensed">
-                <!--Head means title columns-->
-                <thead>
-                    <tr>
-                        <th>Sale no.</th>
-                        <th>Employee</th>
-                        <th>Customer</th>
-                        <th>Product</th>
-                        <th>Date</th>
-                        <th>Qty</th>
-                        <th>Sale Total ($)</th>
-                    </tr>
-                </thead>
-                <!--Each tr is a row and td is a cell for each column-->
-                <tbody>
-                    <tr>
-                        <td>123</td>
-                        <td>Rose</td>
-                        <td>Earl</td>
-                        <td>Socks</td>
-                        <td>3/31/17</td>
-                        <td>2</td>
-                        <td>10</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            </div>
+            <!-- Table for showing all Sales -->
+        <table class="table table-bordered table-condensed" id="showAllSales" style="display:none">
+          <!--Head means title columns-->
+          <thead>
+            <tr>
+              <th>SaleID</th>
+              <th>EmployeeID</th>
+              <th>CustomerID</th>
+              <th>ProductID</th>
+              <th>SaleDate</th>
+              <th>Quantity Sold</th>
+              <th>Sale Total</th>
+            </tr>
+          </thead>
+          <!--Each tr is a row and td is a cell for each column-->
+          <tbody>
+            <?php
+                $query = $db->query("SELECT * FROM POSDB.Sale");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo'<tr>';
+                        echo'<td>', $row['SaleID'],'</td>';
+                        echo'<td>', $row['EmployeeID'],'</td>';
+                        echo'<td>', $row['CustomerID'],'</td>';
+                        echo'<td>', $row['ProductID'],'</td>';
+                        echo'<td>', $row['SaleDate'],'</td>';
+                        echo'<td>', $row['Qty'],'</td>';
+                        echo'<td>', $row['SaleTotal'],'</td>';
+                        echo'</tr>';
+                    }
+                }
+                ?>
+          </tbody>
+        </table>
+           
+        <!--Table for showing certain employee sales-->
+        <table class="table table-bordered table-condensed" id="showEmployeeSale" style="display:none">
+          <!--Head means title columns-->
+          <thead>
+            <tr>
+              <th>SaleID</th>
+              <th>EmployeeID</th>
+              <th>CustomerID</th>
+              <th>ProductID</th>
+              <th>SaleDate</th>
+              <th>Quantity Sold</th>
+              <th>Sale Total</th>
+            </tr>
+          </thead>
+          <!--Each tr is a row and td is a cell for each column-->
+          <tbody>
+            <?php
+                if(isset($_POST['submit'])){
+                    $selection = $_POST['selectedValue'];
+                    echo "<script> employeeSales(); </script>";
+                }
+                $query = $db->query("SELECT * FROM POSDB.Sale WHERE EmployeeID = $selection");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo'<tr>';
+                        echo'<td>', $row['SaleID'],'</td>';
+                        echo'<td>', $row['EmployeeID'],'</td>';
+                        echo'<td>', $row['CustomerID'],'</td>';
+                        echo'<td>', $row['ProductID'],'</td>';
+                        echo'<td>', $row['SaleDate'],'</td>';
+                        echo'<td>', $row['Qty'],'</td>';
+                        echo'<td>', $row['SaleTotal'],'</td>';
+                        echo'</tr>';
+                    }
+                }
+                ?>
+          </tbody>
+        </table>
         </div>
-
     </div>
 </body>
 
