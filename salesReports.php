@@ -43,14 +43,13 @@ require 'database/connect.php';
             <div id="report1" class="tab-pane fade in active">
                 <div class="panel panel-default">
                     <h2>Sales per Year ($)</h2>
-                    <div class="form-group">
-                        <select style="width:100px;" class="form-control" name="Year">
-                        <? php 
-                        ?>
-                            <option>2017</option>
+                    <form action="" method="post">
+                        <select class="form-control" name="Year" style="width:100px;">
+                            <option selected value="2017">2017</option>
                             <option>2016</option>
                         </select>
-                    </div>
+                        <input value="Update" class="btn btn-primary">
+                    </form>
                     <div id="sales-chart" class="ct-chart ct-double-octave"></div>
                 </div>
             </div><!--end tab 1-->
@@ -72,17 +71,59 @@ require 'database/connect.php';
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-    <? php
-        $year = $_POST['Year'];
+    <?php
+        $year = 2017;
+
+        $startDates = array();
+        $endDates = array();
+        for($i=1;$i<=12;$i++) {
+            if($i!=12) {
+                if($i<10) {
+                    $startDate = "$year.0$i.01";
+                    $temp = $i+1;
+                    $endDate = "$year.0$temp.01";
+                    if($i==9)
+                        $endDate = "$year.$temp.01";
+                } 
+                else {
+                    $startDate = "$year.$i.01";
+                    $temp = $i+1;
+                    $endDate = "$year.$temp.01"; 
+                }
+            }
+            else {
+                $startDate = "$year.$i.01";
+                $temp = $year+1;
+                $endDate = "$temp.01.01";
+            }
+            array_push($startDates,$startDate);
+            array_push($endDates,$endDate);
+        }
+
+        $chartValues = array(); 
+        for($j=0;$j<12;$j++)
+        {
+            $startDate = $startDates[$j];
+            $endDate = $endDates[$j];
+            $qry = "SELECT SUM(SaleTotal) AS 'sales_total' FROM POSDB.Sale WHERE SaleDate >= '".$startDate."' AND SaleDate < '".$endDate."'";
+            $sql = $db->query($qry);
+            $row = $sql->fetch_array(MYSQLI_ASSOC);
+            $value = $row['sales_total'];
+            if(is_null($value))
+                array_push($chartValues,0);
+            else
+                array_push($chartValues,$value);
+        }
     ?>
+
     <script>
         //Define chart data
+
         var salesData = {
           labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           series: [
-            [5, 2, 4, 2, 0, 6, 2, 8, 1, 7, 3, 2]
+            <?php echo json_encode($chartValues); ?>
           ]
         };
 
@@ -94,8 +135,9 @@ require 'database/connect.php';
         };
 
         //Create charts
+
         new Chartist.Bar('#sales-chart', salesData);
-        new Chartist.Bar('#sales-chart', customerData);
+        new Chartist.Bar('#customer-chart', customerData);
 
         //Needed for when new tabs are selected, so the charts can resize
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
