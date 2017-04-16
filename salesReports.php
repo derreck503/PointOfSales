@@ -97,7 +97,7 @@ require 'database/connect.php';
             <div id="report2" class="tab-pane fade in">
                 <div class="panel panel-default">
                     <h2>Products by Sales</h2>
-                    <hr>
+                    <hr><div class="col-lg-8">
                     <?php 
                         $sql = $db->query("SELECT ProductName FROM POSDB.Product GROUP BY ProductName");
                         if($sql->num_rows){
@@ -131,12 +131,16 @@ require 'database/connect.php';
                             }
                         }
                         echo "<div class=\"well productreport\">Best Selling Product ",$productsArray[$index][0]," : ",$productsArray[$index][1],"</div>";
+                        echo "<table class=\"table table-bordered table-condensed\"><thead><tr><th style=\"width:20px;\">Product</th><th>Sales</th></tr></thead><tbody>";
                         for($i=0;$i<sizeof($productsArray);$i++)
                         {
-                            echo "<div class=\"well productreport\">",$productsArray[$i][0]," : ",$productsArray[$i][1],"</div>";
+                            echo "<tr><td>",$productsArray[$i][0],"</td><td>",$productsArray[$i][1],"</td></tr>";
                         }
+                        echo "</tbody></table>";
 
                     ?>
+                    </div>
+                    <div class="clearfix"></div>
                     <!--<div id="customer-chart" class="ct-chart ct-double-octave"></div>-->
                 </div>
             </div><!--end tab 2-->
