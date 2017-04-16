@@ -158,6 +158,35 @@ require 'database/connect.php';
 					$_SESSION['cart'] = array();
 					}
 					?>
+
+		  <!--Checkout Cart-->
+			<form action="" method="post" name="myForm1" id="myForm1">
+                        <input type="submit" class="btn btn-primary" name="checkOutCart" value="Checkout Cart" />
+                </form>
+
+					<?php
+					if(isset($_POST['checkOutCart'])){
+					//$_SESSION['cart'] = array();
+					echo "Cart has been checkedout!";
+
+					foreach($_SESSION['cart'] as $rows){
+						//echo'<br>Data: ';
+						//echo $rows;
+						$query1 = $db->query("SELECT ProductName FROM POSDB.Product WHERE ProductID = $rows");
+						$productId = mysql_query($query1);
+						//echo 'product Id: ';
+						//echo $productId;
+
+						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`,`CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES(0, 1, 1, $rows,'2017-04-15', 1, 5)");
+	                	$results = mysql_query($create);
+					}
+
+
+
+
+					}
+					?>
+					
 					<hr>
 
 			 <!--Checkout Table-->
@@ -196,9 +225,6 @@ require 'database/connect.php';
 					$eName = "1";
 					$cID = "1";
 					$listOfProducts = implode(',',$_SESSION['cart']);
-					$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`,`CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES(0, 1, 1, $listOfProducts,'2017-01-01', 1, 5)");
-
-                	$results = mysql_query($create);
                 }
 
 		  ?>
