@@ -6,6 +6,10 @@ body {
     font-family: 'Open Sans';
 }
 
+table {
+    font-size:12px;
+}
+
 .nav-tabs li a {
     font-family: 'Raleway', sans-serif;
 }

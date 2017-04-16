@@ -1,5 +1,14 @@
 <?php
 require 'database/connect.php';
+session_start();
+echo $_SESSION['Identifier'];
+session_destroy();
+
+?>
+
+
+<?php
+require 'database/connect.php';
 
 
   if(isset($_POST["Log"])) {
