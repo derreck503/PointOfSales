@@ -95,6 +95,32 @@ require 'database/connect.php';
         <div class="col-md-8">
             <row>
             <div class="well">
+				<!--Select Customer from dropdown-->
+				<div class="dropdown form-group">
+					<form action="" method="post" name="myForm" id="myForm">
+					<table>
+						<tr>
+						<td>
+							<select name="selectedValue" class="form-control">
+							<option>Select a Customer</option>
+							<?php
+									$sql = $db->query("SELECT FirstName, LastName, CustomerID FROM POSDB.Customer");
+									if($sql->num_rows){
+										$suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+										foreach($suppliers as $sup){
+											echo '<option value="',$sup['CustomerID'],'" id="selection">',$sup['FirstName'],' ',$sup['LastName'],'</option>';
+										}
+									}
+									?>
+							</select>
+							<td>
+							<input type="submit" class="btn btn-primary" name="CustomerSelect" value="Select Customer" />
+							</td>
+						</tr>
+					</table>
+					</form>
+				</div>
+
         <!--Select Inventroy from dropdown-->
           <div class="dropdown form-group">
             <form action="" method="post" name="myForm" id="myForm">
@@ -120,8 +146,8 @@ require 'database/connect.php';
               </table>
             </form>
           </div>
-          <hr>
-		  
+          
+
 		  <!--Clear Cart-->
 			<form action="" method="post" name="myForm" id="myForm">
                         <input type="submit" class="btn btn-primary" name="ClearCart" value="Clear Cart" />
@@ -134,34 +160,8 @@ require 'database/connect.php';
 					?>
 					<hr>
 
-
-                <h4>Customer Details</h4>
-					<!--Select Customer from dropdown-->
-					<div class="dropdown form-group">
-						<form action="" method="post" name="myForm" id="myForm">
-						<table>
-							<tr>
-							<td>
-								<select name="selectedValue" class="form-control">
-								<option>Select a Customer</option>
-								<?php
-										$sql = $db->query("SELECT FirstName, LastName, CustomerID FROM POSDB.Customer");
-										if($sql->num_rows){
-											$suppliers = $sql->fetch_all(MYSQLI_ASSOC);
-											foreach($suppliers as $sup){
-												echo '<option value="',$sup['CustomerID'],'" id="selection">',$sup['FirstName'],' ',$sup['LastName'],'</option>';
-											}
-										}
-										?>
-								</select>
-								<td>
-								<input type="submit" class="btn btn-primary" name="CustomerSelect" value="Select Customer" />
-								</td>
-							</tr>
-						</table>
-						</form>
-					</div>
 			 <!--Checkout Table-->
+			 <h2>Checkout Cart:</h2>
 			  <table class="table table-bordered table-condensed" id="showCart" style="display:block">
 				<!--Head means title columns-->
 				<thead>
@@ -176,9 +176,6 @@ require 'database/connect.php';
 			<?php
  				if(isset($_POST['submit'])){
                     $selection = $_POST['selectedValue'];
-                    echo "Selected: ";
-                    echo $selection;
-					echo "<br>";
 					if(empty($_SESSION['cart'])){
 					$_SESSION['cart'] = array();
 					}
