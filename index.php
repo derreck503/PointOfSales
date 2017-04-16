@@ -38,9 +38,14 @@ session_start();
   <title>Point of Sales</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/custom.js"></script>
 </head>
 
 
@@ -53,11 +58,12 @@ session_start();
   <div class="container" style="text-align: center; margin-top: 250px; width: 80%;">
     <!--Title banner-->
     <div class="jumbotron" style="background-color:aliceblue;">
-      <h1>Welcome to NewBorn Outlet</h1>
-      <p>The leading point of sales system for a baby store.</p>
+      <img src="images/newbornoutletlogo.png">
+      <br><br><br>
+      <p><strong>The leading point of sales system for a baby store.</strong></p>
+      <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#popUpWindow">Log In</button>
     </div>
     <!--Login button-->
-    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#popUpWindow">Log In</button>
     <!--Contents of button-->
     <div class="modal fade" id="popUpWindow" style="margin-top: 300px;">
       <div class="modal-dialog">

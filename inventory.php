@@ -21,6 +21,16 @@ require 'database/connect.php';
     <script src="js/custom.js"></script>
     <script src="js/showProduct.js"></script>
     <script src="js/showProducts.js"></script>
+
+    <style type="text/css">
+        .product .form-control {
+            display: inline-block;
+            width: 50%;
+        }
+        .product label {
+            width: 8%;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,7 +39,7 @@ require 'database/connect.php';
     <!--Table for report-->
     <div class="container-fluid">
         <!-- Modal for trigger -->
-        <div class="modal" id="modalWarning" role="dialog">
+        <div class="modal" id="modalWarnings" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -121,20 +131,21 @@ require 'database/connect.php';
           <hr>
           <!--Add a Product-->
           <h4>Add a Product:</h4>
-          <form action="" method="post">
+          <form class="product" action="" method="post">
             <p>
               <label for="ProductName">Product Name: </label>
-              <input type="text" name="ProductName" id="ProductName">
+              <input type="text" class="form-control" name="ProductName" id="ProductName"><br>
               <label for="Supplier">Supplier: </label>
-              <input type="text" name="Supplier" id="Supplier">
+              <input type="text" class="form-control" name="Supplier" id="Supplier"><br>
               <label for="ProductDetail">Product Detail: </label>
-              <input type="text" name="ProductDetail" id="ProductDetail">
+              <input type="text" class="form-control" name="ProductDetail" id="ProductDetail"><br>
               <label for="Category">Category: </label>
-              <input type="text" name="Category" id="Category">
+              <input type="text" class="form-control" name="Category" id="Category"><br>
               <label for="Quantity">Quantity: </label>
-              <input type="text" name="Quantity" id="Quantity">
+              <input type="text" class="form-control" name="Quantity" id="Quantity"><br>
               <label for="UnitPrice">UnitPrice: </label>
-              <input type="text" name="UnitPrice" id="UnitPrice">
+              <input type="text" class="form-control" name="UnitPrice" id="UnitPrice"><br>
+              <br>
             <input type="submit" name="Create" value="Create" class="btn btn-primary">
           </form>
           <?php
@@ -157,7 +168,7 @@ require 'database/connect.php';
           <!--Head means title columns-->
           <thead>
             <tr>
-              <th>ProductID/th>
+              <th>ProductID</th>
               <th>Product Name</th>
               <th>Supplier</th>
               <th>Product Details</th>
