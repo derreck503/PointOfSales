@@ -152,7 +152,7 @@ require 'database/connect.php';
             }
           ?>
         </div>
-<!-- Table for showing all Suppliers -->
+      <!-- Table for showing all products -->
         <table class="table table-bordered table-condensed" id="showAllProducts" style="display:none">
           <!--Head means title columns-->
           <thead>
@@ -193,7 +193,7 @@ require 'database/connect.php';
           <!--Head means title columns-->
           <thead>
             <tr>
-              <th>ProductID/th>
+              <th>ProductID</th>
               <th>Product Name</th>
               <th>Supplier</th>
               <th>Product Details</th>
