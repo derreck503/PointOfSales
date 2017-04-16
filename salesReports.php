@@ -32,8 +32,6 @@ require 'database/connect.php';
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#report1">Sales</a></li>
               <li><a data-toggle="tab" href="#report2">Products</a></li>
-              <li><a href="#">Menu 2</a></li>
-              <li><a href="#">Menu 3</a></li>
             </ul>
             <!--end tabs navigation-->
 

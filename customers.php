@@ -18,6 +18,16 @@ require 'database/connect.php';
     <script src="js/custom.js"></script>
     <script src="js/showAllCustomers.js"></script>
     <script src="js/showCustomer.js"></script>
+
+    <style type="text/css">
+        .customers .form-control {
+            display: inline-block;
+            width: 50%;
+        }
+        .customers label {
+            width: 8%;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,25 +52,25 @@ require 'database/connect.php';
                 <hr>
             <h4>Add a Customer:</h4>
             <!--Add a customer-->
-            <form action="" method="post">
+            <form class="customers" action="" method="post">
               <label for="LastName">Last Name: </label>
-              <input type="text" name="LastName" id="LastName">
+              <input class="form-control" type="text" name="LastName" id="LastName"><br>
               <label for="FirstName">First Name: </label>
-              <input type="text" name="FirstName" id="FirstName">
+              <input class="form-control" type="text" name="FirstName" id="FirstName"><br>
               <label for="Address">Address: </label>
-              <input type="text" name="Address" id="Address">
+              <input class="form-control" type="text" name="Address" id="Address"><br>
               <label for="City">City: </label>
-              <input type="text" name="City" id="City">
+              <input class="form-control" type="text" name="City" id="City"><br>
               <label for="PostalCode">Postal Code: </label>
-              <input type="text" name="PostalCode" id="PostalCode">
+              <input class="form-control" type="text" name="PostalCode" id="PostalCode"><br>
               <label for="Country">Country: </label>
-              <input type="text" name="Country" id="Country">
+              <input class="form-control" type="text" name="Country" id="Country"><br>
               <label for="Phone">Phone: </label>
-              <input type="text" name="Phone" id="Phone">
+              <input class="form-control" type="text" name="Phone" id="Phone"><br>
               <label for="Email">Email: </label>
-              <input type="text" name="Email" id="Email">
+              <input class="form-control" type="text" name="Email" id="Email"><br>
               <label for="Membership">Membership: </label>
-              <input type="text" name="Membership" id="Membership">
+              <input class="form-control" type="text" name="Membership" id="Membership"><br>
             <input type="submit" name="Create" value="Create" class="btn btn-primary">
           </form>
           <?php
