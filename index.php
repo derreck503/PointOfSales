@@ -58,7 +58,7 @@ session_start();
   <div class="container" style="text-align: center; margin-top: 250px; width: 80%;">
     <!--Title banner-->
     <div class="jumbotron" style="background-color:aliceblue;">
-      <img src="images/newbornoutletlogo.png">
+      <img src="images/newbornoutletlogo.png" class="img-responsive">
       <br><br><br>
       <p><strong>The leading point of sales system for a baby store.</strong></p>
       <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#popUpWindow">Log In</button>
