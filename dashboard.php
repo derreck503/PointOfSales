@@ -191,7 +191,7 @@ require 'database/connect.php';
 
 			 <!--Checkout Table-->
 			 <h2>Checkout Cart:</h2>
-			  <table class="table table-bordered table-condensed" id="showCart" style="display:block">
+			  <table class="table table-striped" id="showCart" style="display:block">
 				<!--Head means title columns-->
 				<thead>
 					<tr>

@@ -129,7 +129,7 @@ require 'database/connect.php';
             </div>
 
             <!-- table of all Customers -->
-            <table class="table table-bordered table-condensed" id="showAllCustomerResults" style="display:none">
+            <table class="table table-striped" id="showAllCustomerResults" style="display:none">
                 <!--Head means title columns-->
                 <thead>
                     <tr>
@@ -171,7 +171,7 @@ require 'database/connect.php';
             </table>
 
             <!--Table for searched Customer-->
-            <table class="table table-bordered table-condensed" id="showCustomerResults" style="display:none">
+            <table class="table table-striped" id="showCustomerResults" style="display:none">
                 <!--Head means title columns-->
                 <thead>
                     <tr>

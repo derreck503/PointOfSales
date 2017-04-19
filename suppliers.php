@@ -147,7 +147,7 @@ require 'database/connect.php';
         </div>
 
         <!-- Table for showing all Suppliers -->
-        <table class="table table-bordered table-condensed" id="showAllSuppliers" style="display:none">
+        <table class="table table-striped" id="showAllSuppliers" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>
@@ -189,7 +189,7 @@ require 'database/connect.php';
         </table>
 
         <!--Table for showing certain supplier -->
-        <table class="table table-bordered table-condensed" id="showSupplier" style="display:none">
+        <table class="table table-striped" id="showSupplier" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>

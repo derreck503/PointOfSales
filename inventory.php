@@ -38,6 +38,7 @@ require 'database/connect.php';
 
     <!--Table for report-->
     <div class="container-fluid">
+
         <!-- Modal for trigger -->
         <div class="modal" id="modalWarnings" role="dialog">
             <div class="modal-dialog">
@@ -164,7 +165,7 @@ require 'database/connect.php';
           ?>
         </div>
       <!-- Table for showing all products -->
-        <table class="table table-bordered table-condensed" id="showAllProducts" style="display:none">
+        <table class="table table-striped" id="showAllProducts" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>
@@ -200,7 +201,7 @@ require 'database/connect.php';
         </table>
 
         <!--Table for showing certain product -->
-        <table class="table table-bordered table-condensed" id="showProduct" style="display:none">
+        <table class="table table-striped" id="showProduct" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>

@@ -63,8 +63,7 @@ require 'database/connect.php';
 
             <!-- Table for showing all Sales -->
 
-<div class="table-responsive">
-        <table class="table" id="showAllSales" style="display:none">
+        <table class="table table-striped" id="showAllSales" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>
@@ -98,11 +97,10 @@ require 'database/connect.php';
                 ?>
           </tbody>
         </table>
-           </div>
 
-           <div class="table-responsive">
+
         <!--Table for showing certain employee sales-->
-        <table class="table" id="showEmployeeSale" style="display:none">
+        <table class="table table-striped" id="showEmployeeSale" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>
@@ -140,7 +138,6 @@ require 'database/connect.php';
                 ?>
           </tbody>
         </table>
-</div>
         </div>
     </div>
 </body>
