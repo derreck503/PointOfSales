@@ -19,7 +19,10 @@ session_start();
         
         }
     }
-            echo "Invalid Username or Password";
+            //echo "Invalid Username or Password";
+            echo'<div class="alert alert-danger fade in">';
+            echo '<a href="#" class="close" data-dismiss="alert" style="text-align: center;" aria-label="close">&times;</a>Invalid Login. Please try again!</div>';
+            echo '</div>';
        
   }
 

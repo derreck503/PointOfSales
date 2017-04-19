@@ -26,7 +26,7 @@ require 'database/connect.php';
     <!--Table for report-->
     <div class="container-fluid">
         <!--8 column width for the sales register container-->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <h2>Sales Details</h2>
         <hr>
             <!--search bar-->
@@ -59,12 +59,12 @@ require 'database/connect.php';
                 </table>
                 </form>
             </div>
-            <hr>
-
-
             </div>
+
             <!-- Table for showing all Sales -->
-        <table class="table table-bordered table-condensed" id="showAllSales" style="display:none">
+
+<div class="table-responsive">
+        <table class="table" id="showAllSales" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>
@@ -98,9 +98,11 @@ require 'database/connect.php';
                 ?>
           </tbody>
         </table>
-           
+           </div>
+
+           <div class="table-responsive">
         <!--Table for showing certain employee sales-->
-        <table class="table table-bordered table-condensed" id="showEmployeeSale" style="display:none">
+        <table class="table" id="showEmployeeSale" style="display:none">
           <!--Head means title columns-->
           <thead>
             <tr>
@@ -138,6 +140,7 @@ require 'database/connect.php';
                 ?>
           </tbody>
         </table>
+</div>
         </div>
     </div>
 </body>
