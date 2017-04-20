@@ -63,7 +63,7 @@ require 'database/connect.php';
 	    			<h1>$<?php
 						$sql = $db->query("SELECT SUM(SaleTotal) AS 'sales_total' FROM POSDB.Sale");
 						$row = $sql->fetch_array(MYSQLI_ASSOC);	
-						echo $row['sales_total'];					
+						echo round($row['sales_total'], 2);					
 						?></h1>
 		    		<h4>Total Sales</h4>
 	    		</span>
