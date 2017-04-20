@@ -93,6 +93,49 @@ require 'database/connect.php';
             </form>
           </div>
           <hr>
+        <!--Re-Stock Select Inventroy from dropdown-->
+          <div class="dropdown form-group">
+            <form action="" method="post" name="myForm" id="myForm">
+              <table>
+                <tr>
+                  <td>
+                    <select name="selectedInventory" class="form-control">
+                      <option>Select a Product To Re-Stock</option>
+                      <?php
+                            $sql = $db->query("SELECT ProductID, ProductName FROM POSDB.Product");
+                            if($sql->num_rows){
+                                $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+                                foreach($suppliers as $sup){
+                                    echo '<option value="',$sup['ProductID'],'" id="selection">',$sup['ProductName'],'</option>';
+                                }
+                            }
+                            ?>
+                    </select>
+                    <!--<select name ="reStock" class="form-control">
+                    <option>Select Ammount</option>
+                    <option>1</option>
+                    </select>-->
+                        <input type="text" name="reStock" class="form-control" placeholder="Enter Ammount">
+                      <input type="submit" class="btn btn-primary" name="ReStock" value="Submit" />
+                    </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+            <?php
+                if(isset($_POST['ReStock'])){
+                    $updateValue = $_POST['selectedInventory'];
+                    $updateAmount = $_POST['reStock'];
+                    echo "updated ";
+                    echo $updateValue;
+                    echo $updateAmount;
+                    $update = $db->query("UPDATE POSDB.Product SET QtyInStock = $updateAmount WHERE ProductID = $updateValue");
+                    $result = mysql_query($update);
+                    //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
+                    //header("Refresh:0");
+                }
+                ?>
+          <hr>
             <!--Delete a Inventory from dropdown-->
           <div class="dropdown form-group">
             <form action="" method="post" name="myForm" id="myForm">
