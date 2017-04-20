@@ -43,7 +43,7 @@ require 'database/connect.php';
                         <select name="selectedValue" class="form-control">
                         <option>Select an Employee</option>
                         <?php
-                                $sql = $db->query("SELECT EmployeeID, FirstName, LastName FROM POSDB.Employee");
+                                $sql = $db->query("SELECT EmployeeID, FirstName, LastName, ProductName  FROM POSDB.Employee");
                                 if($sql->num_rows){
                                     $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
                                     foreach($suppliers as $sup){

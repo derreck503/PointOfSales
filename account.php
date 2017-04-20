@@ -41,7 +41,7 @@ $employeeID = $_SESSION['Identifier'];
             
         <h2>Personal Information</h2>
             <hr>
-            <div class="col-lg-8">
+            <div class="col-lg-10">
             <div class="well">
                     <div class="dropdown form-group">
                     <form action="" method="post" name="myForm">
@@ -139,7 +139,7 @@ $employeeID = $_SESSION['Identifier'];
 
             </div>
 
-            <div class="col-lg-8" id="admintools" style="display:none;">
+            <div class="col-lg-10" id="admintools" style="display:none;">
             <script> showAdminTools(); </script>
             <h2>Administration Tools</h2>
             <hr>
@@ -147,7 +147,7 @@ $employeeID = $_SESSION['Identifier'];
             <h3>View Employee Details</h3>
             <div class="well">
                 <button type="button" class="btn btn-primary" onclick="showAllEmployees();">Show all employees</button>
-                <table class="table table-bordered table-condensed" id="showAllEmployees" style="display:none">
+                <table class="table table-striped" id="showAllEmployees" style="display:none">
                       <!--Head means title columns-->
                       <thead>
                         <tr>
@@ -324,7 +324,7 @@ $employeeID = $_SESSION['Identifier'];
             <div class="well">
                 <button type="button" class="btn btn-primary" onclick="showAudit();">Show audit history</button>
                 <p>
-                <table class="table table-bordered table-condensed" id="showAuditDetails" style="display:none">
+                <table class="table table-striped" id="showAuditDetails" style="display:none">
                       <!--Head means title columns-->
                       <thead>
                         <tr>
