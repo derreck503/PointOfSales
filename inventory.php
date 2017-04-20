@@ -115,7 +115,7 @@ require 'database/connect.php';
                     <option>Select Ammount</option>
                     <option>1</option>
                     </select>-->
-                        <input type="text" name="reStock" class="form-control" placeholder="Enter Ammount">
+                        <input type="text" name="reStock" class="form-control" placeholder="Enter Amount">
                       <input type="submit" class="btn btn-primary" name="ReStock" value="Submit" />
                     </td>
                 </tr>
