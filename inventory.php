@@ -126,9 +126,9 @@ require 'database/connect.php';
                 if(isset($_POST['ReStock'])){
                     $updateValue = $_POST['selectedInventory'];
                     $updateAmount = $_POST['reStock'];
-                    echo "updated ";
-                    echo $updateValue;
-                    echo $updateAmount;
+                    //echo "updated ";
+                    //echo $updateValue;
+                    //echo $updateAmount;
                     $update = $db->query("UPDATE POSDB.Product SET QtyInStock = $updateAmount WHERE ProductID = $updateValue");
                     $result = mysql_query($update);
                     //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
