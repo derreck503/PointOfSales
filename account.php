@@ -4,6 +4,7 @@ session_start();
 $employeeID = $_SESSION['Identifier'];
 ?>
 <html>
+
 <head>
     <title>Employee Account</title>
     <meta charset="utf-8" />
