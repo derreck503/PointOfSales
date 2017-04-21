@@ -68,10 +68,10 @@ require 'database/connect.php';
           <thead>
             <tr>
               <th>SaleID</th>
-              <th>EmployeeID</th>
-              <th>CustomerID</th>
-              <th>ProductID</th>
-              <th>SaleDate</th>
+              <th>Employee</th>
+              <th>Customer</th>
+              <th>Product</th>
+              <th>Sale Date</th>
               <th>Quantity Sold</th>
               <th>Sale Total</th>
             </tr>
@@ -79,15 +79,15 @@ require 'database/connect.php';
           <!--Each tr is a row and td is a cell for each column-->
           <tbody>
             <?php
-                $query = $db->query("SELECT * FROM POSDB.Sale");
+                $query = $db->query("SELECT Sale.SaleID, Employee.EmployeeID, Customer.CustomerID, Product.ProductName, Sale.SaleDate, Sale.Qty, Sale.SaleTotal, Customer.FirstName as cFName, Customer.LastName as cLName, Employee.FirstName as eFName,Employee.LastName as eLName FROM Sale, Employee, Customer, Product WHERE Sale.EmployeeID = Employee.EmployeeID AND Sale.CustomerID = Customer.CustomerID AND Sale.ProductID = Product.ProductID");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
                         echo'<tr>';
                         echo'<td>', $row['SaleID'],'</td>';
-                        echo'<td>', $row['EmployeeID'],'</td>';
-                        echo'<td>', $row['CustomerID'],'</td>';
-                        echo'<td>', $row['ProductID'],'</td>';
+                        echo'<td>', $row['eFName'], ' ',$row['eLName'],'</td>';
+                        echo'<td>', $row['cFName'], ' ',$row['cLName'], '</td>';
+                        echo'<td>', $row['ProductName'],'</td>';
                         echo'<td>', $row['SaleDate'],'</td>';
                         echo'<td>', $row['Qty'],'</td>';
                         echo'<td>', $row['SaleTotal'],'</td>';
