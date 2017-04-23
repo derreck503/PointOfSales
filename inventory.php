@@ -224,15 +224,18 @@ require 'database/connect.php';
           <!--Each tr is a row and td is a cell for each column-->
           <tbody>
             <?php
-                $query = $db->query("SELECT * FROM POSDB.Product");
+                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Supplier.CompanyName AS Supplier, ProductDetail.Description AS Description, Product.Category, Product.QtyInStock, Product.UnitPrice
+                FROM Product
+                INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID
+                INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
                         echo'<tr>';
                         echo'<td>', $row['ProductID'],'</td>';
                         echo'<td>', $row['ProductName'],'</td>';
-                        echo'<td>', $row['SupplierID'],'</td>';
-                        echo'<td>', $row['ProductDetailID'],'</td>';
+                        echo'<td>', $row['Supplier'],'</td>';
+                        echo'<td>', $row['Description'],'</td>';
                         echo'<td>', $row['Category'],'</td>';
                         echo'<td>', $row['QtyInStock'],'</td>';
                         echo'<td>', $row['UnitPrice'],'</td>';
@@ -249,12 +252,12 @@ require 'database/connect.php';
           <thead>
             <tr>
               <th>ProductID</th>
-              <th>Product Name</th>
+              <th>Product</th>
               <th>Supplier</th>
-              <th>Product Details</th>
+              <th>Description</th>
               <th>Category</th>
               <th>Qty In Stock</th>
-              <th>Unit Stock</th>
+              <th>Unit Price</th>
             </tr>
           </thead>
           <!--Each tr is a row and td is a cell for each column-->
@@ -264,15 +267,19 @@ require 'database/connect.php';
                     $selection = $_POST['selectedValue'];
                     echo "<script> showProduct(); </script>";
                 }
-                $query = $db->query("SELECT * FROM POSDB.Product Where ProductID = $selection");
+                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Supplier.CompanyName, ProductDetail.Description, Product.Category, Product.QtyInStock, Product.UnitPrice
+                FROM Product
+                INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID
+                INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID
+                WHERE Product.ProductID = $selection");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
                         echo'<tr>';
                         echo'<td>', $row['ProductID'],'</td>';
                         echo'<td>', $row['ProductName'],'</td>';
-                        echo'<td>', $row['SupplierID'],'</td>';
-                        echo'<td>', $row['ProductDetailID'],'</td>';
+                        echo'<td>', $row['CompanyName'],'</td>';
+                        echo'<td>', $row['Description'],'</td>';
                         echo'<td>', $row['Category'],'</td>';
                         echo'<td>', $row['QtyInStock'],'</td>';
                         echo'<td>', $row['UnitPrice'],'</td>';
