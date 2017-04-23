@@ -43,7 +43,7 @@ require 'database/connect.php';
                         <select name="selectedValue" class="form-control">
                         <option>Select an Employee</option>
                         <?php
-                                $sql = $db->query("SELECT EmployeeID, FirstName, LastName, ProductName  FROM POSDB.Employee");
+                                $sql = $db->query("SELECT *  FROM POSDB.Employee");
                                 if($sql->num_rows){
                                     $suppliers = $sql->fetch_all(MYSQLI_ASSOC);
                                     foreach($suppliers as $sup){
@@ -120,15 +120,15 @@ require 'database/connect.php';
                     $selection = $_POST['selectedValue'];
                     echo "<script> employeeSales(); </script>";
                 }
-                $query = $db->query("SELECT * FROM POSDB.Sale WHERE EmployeeID = $selection");
+                $query = $db->query("SELECT Sale.SaleID, Employee.EmployeeID, Customer.CustomerID, Product.ProductName, Sale.SaleDate, Sale.Qty, Sale.SaleTotal, Customer.FirstName as cFName, Customer.LastName as cLName, Employee.FirstName as eFName,Employee.LastName as eLName FROM Sale, Employee, Customer, Product WHERE Sale.EmployeeID = $selection AND Sale.CustomerID = Customer.CustomerID AND Sale.ProductID = Product.ProductID");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
                         echo'<tr>';
                         echo'<td>', $row['SaleID'],'</td>';
-                        echo'<td>', $row['EmployeeID'],'</td>';
-                        echo'<td>', $row['CustomerID'],'</td>';
-                        echo'<td>', $row['ProductID'],'</td>';
+                        echo'<td>', $row['eFName'], ' ',$row['eLName'],'</td>';
+                        echo'<td>', $row['cFName'], ' ',$row['cLName'], '</td>';
+                        echo'<td>', $row['ProductName'],'</td>';
                         echo'<td>', $row['SaleDate'],'</td>';
                         echo'<td>', $row['Qty'],'</td>';
                         echo'<td>', $row['SaleTotal'],'</td>';
