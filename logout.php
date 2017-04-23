@@ -57,35 +57,8 @@ require 'database/connect.php';
     <div class="jumbotron" style="background-color:aliceblue;">
       <p>You have been logged out.</p>
       <hr>
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#popUpWindow">Log In</button>
-    </div>
-    <!--Login button-->
-    <!--Contents of button-->
-    <div class="modal fade" id="popUpWindow" style="margin-top: 300px;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!--Header inside of button-->
-                    <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3 class="modal-title">Log In</h3>
-          </div>
-          <!--Body inside of button-->
-          <div class="modal-body">
-            <form role="form" action="" method="post">
-              <div class="form-group">
-                <input type="username" class="form-control" placeholder="Username" name='username'>
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name='password'>
-              </div>
-              </div>
-          <!--Footer inside of button-->
-          <div class="modal-footer">
-           <button class="btn btn-primary btn-block" type="submit" name="Log" >Log In</button>
-           </form>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="btn btn-primary btn-lg" onclick="location.href='index.php'" >Return to HomePage</button>
+
     </div>
   </div>
 

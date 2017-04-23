@@ -50,7 +50,7 @@ require 'database/connect.php';
 	    		<div class="container-fluid">
 		    		<span class="col-md-4 visible-md-block visible-lg-block glyphicon glyphicon-user" style="font-size:60px; color:#64b5f6; padding-top:30px; padding-bottom:20px;"></span>
 		    		<span class="col-xs-12 col-md-8">
-			    		<h1><?php
+						<h1><?php
 						$sql11 = $db->query("SELECT SUM(SaleTotal) AS 'salesTotal' FROM POSDB.Sale WHERE EmployeeID = $EmployeeIDSale");
 						$rowz = $sql11->fetch_array(MYSQLI_ASSOC);	
 						echo round($rowz['salesTotal'], 2);					
@@ -173,7 +173,6 @@ require 'database/connect.php';
 					if(isset($_POST['checkOutCart'])){
 					//$_SESSION['cart'] = array();
 					echo "Cart has been checkedout!";
-
 					foreach($_SESSION['cart'] as $rows){
 						//echo'<br>Data: ';
 						//echo $rows;
@@ -181,14 +180,9 @@ require 'database/connect.php';
 						$productId = mysql_query($query1);
 						//echo 'product Id: ';
 						//echo $productId;
-
 						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`,`CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES(0, 1, 1, $rows,'2017-04-15', 1, 5)");
 	                	$results = mysql_query($create);
 					}
-
-
-
-
 					}
 					?>
 					
@@ -218,7 +212,6 @@ require 'database/connect.php';
 					//$myArr[] = $selection;
 					array_push($_SESSION['cart'], $selection);
 					//$arrlength = count($cart);
-
 					foreach($_SESSION['cart'] as $rows){
 						echo'<tr>';
 						echo'<td>',$rows,'</td>';
@@ -231,7 +224,6 @@ require 'database/connect.php';
 					$cID = "1";
 					$listOfProducts = implode(',',$_SESSION['cart']);
                 }
-
 		  ?>
 				</tbody>
 				</table>
