@@ -28,27 +28,19 @@ require 'database/connect.php';
         <!--one huge column for the whole container-->
         <div class="col-lg-12">
 
-            <!--tabs navigation-->
+            <!--tabs navigation
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#report1">Sales</a></li>
               <li><a data-toggle="tab" href="#report2">Products</a></li>
             </ul>
-            <!--end tabs navigation-->
+            end tabs navigation-->
 
             <!--tab content-->
-            <div class="tab-content">
+            <div class="container-fluid">
             <!-- tab 1 -->
-            <div id="report1" class="tab-pane fade in active">
+            <div id="report1" class="col-lg-6">
                 <div class="panel panel-default">
-                    <h2>Sales per Year (
-                        <?php
-                            $year = 2017;
-                            if(isset($_POST['salessubmit'])){
-                            $year = $_POST['selectedValueSales'];
-                            } 
-                            echo $year;
-                        ?>
-                    )</h2>
+                    <h2>Sales per Year</h2>
                     <!-- dropdown menu for Sales -->
                     <div class="dropdown form-group">
                         <form action="" method="post" name="myForm" id="myForm">
@@ -87,18 +79,106 @@ require 'database/connect.php';
                             </tr>
                           </table>
                         </form>
+                        <h4>Currently selected: <?php
+                            $year = 2017;
+                            if(isset($_POST['salessubmit'])){
+                            $year = $_POST['selectedValueSales'];
+                            } 
+                            echo $year;
+                        ?></h4>
                     </div>
+
+                    <hr>
 
                     <!-- Sales Chart -->
                     <div id="sales-chart" class="ct-chart ct-major-eleventh"></div>
                 </div>
             </div><!--end tab 1-->
             <!-- tab 2 -->
-            <div id="report2" class="tab-pane fade in">
+            <div id="report2" class="col-lg-6">
                 <div class="panel panel-default">
-                    <h2>April Product Sales</h2>
+                    <h2>Product Sales</h2>
                     <hr><div class="col-lg-8">
+
+                    <div class="dropdown form-group">
+                        <form action="" method="post" name="myForm" id="myForm">
+                          <table>
+                            <tr>
+                              <td>
+                                <select name="selectedMonthProducts" class="form-control">
+                                  <option>Select Month</option>
+                                  <option value="01" id="selection">January</option>
+                                  <option value="02" id="selection">February</option>
+                                  <option value="03" id="selection">March</option>
+                                  <option value="04" id="selection">April</option>
+                                  <option value="05" id="selection">May</option>
+                                  <option value="06" id="selection">June</option>
+                                  <option value="07" id="selection">July</option>
+                                  <option value="08" id="selection">August</option>
+                                  <option value="09" id="selection">September</option>
+                                  <option value="10" id="selection">October</option>
+                                  <option value="11" id="selection">November</option>
+                                  <option value="12" id="selection">December</option>
+                                </select>
+                                <select name="selectedValueProducts" class="form-control">
+                                  <option>Select Year</option>
+                                    <?php
+                                        $sql = $db->query("SELECT SaleDate FROM POSDB.Sale ORDER BY SaleDate DESC");
+                                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                                        $currentYearProduct = substr($row['SaleDate'],0,4);
+                                        $sql = $db->query("SELECT SaleDate FROM POSDB.Sale ORDER BY SaleDate ASC");
+                                        $row = $sql->fetch_array(MYSQLI_ASSOC);
+                                        $oldestYearProduct = substr($row['SaleDate'],0,4);
+                                        echo '<option value="',$currentYearProduct,'" id="selection">',$currentYearProduct,'</option>';
+                                        $testYearProduct = $currentYearProduct-1;
+                                        while($testYearProduct>$oldestYearProduct){
+                                            $sql = $db->query("SELECT SaleDate FROM POSDB.Sale WHERE SaleDate LIKE '".$testYearProduct."%'");
+                                            $row = $sql->fetch_array(MYSQLI_ASSOC);
+                                            $currentYearProduct=$row['SaleDate'];
+                                            if(!is_null($currentYearProduct))
+                                            {
+                                                $currentYearProduct=substr($row['SaleDate'],0,4);
+                                                echo '<option value="',$currentYearProduct,'" id="selection">',$currentYearProduct,'</option>';
+                                            }
+                                            $currentYearProduct = $testYearProduct;
+                                            $testYearProduct = $currentYearProduct-1;
+                                        };
+                                        echo '<option value="',$oldestYearProduct,'" id="selection">',$oldestYearProduct,'</option>';
+                                    ?>
+                                </select>
+                                <td>
+                                  <input type="submit" class="btn btn-primary" name="productssubmit" value="Submit" />
+                                </td>
+                            </tr>
+                          </table>
+                        </form>
+                    </div>
+
+
+                    <hr>
                     <?php 
+                        $productYear = 2017;
+                        $productMonth = "04"; 
+                        if(isset($_POST['productssubmit'])){
+                            $productYear = $_POST['selectedValueProducts'];
+                            $productMonth = $_POST['selectedMonthProducts'];
+                        }
+
+                        echo "<h4>Currently selected: ",$productMonth,".",$productYear,"</h4>";
+
+                        if($productMonth!="12")
+                        {
+                            $startDateProduct = "$productYear.$productMonth.01";
+                            $temp = $productMonth+1;
+                            $endDateProduct = "$productYear.0$temp.01";
+                        }
+                        else
+                        {
+                            $startDateProduct = "$productYear.$productMonth.01";
+                            $temp = $productYear+1;
+                            $endDateProduct = "$productYear.01.01";
+                        }
+
                         $sql = $db->query("SELECT ProductName FROM POSDB.Product GROUP BY ProductName");
                         if($sql->num_rows){
                             $products = $sql->fetch_all(MYSQLI_ASSOC);
@@ -112,7 +192,7 @@ require 'database/connect.php';
                             $productIDs = $sql->fetch_all(MYSQLI_ASSOC);
                             foreach($productIDs as $prID)
                             {
-                                $sql = $db->query("SELECT SUM(SaleTotal) as sales FROM POSDB.Sale WHERE ProductID='".$prID['ProductID']."'");
+                                $sql = $db->query("SELECT SUM(SaleTotal) as sales FROM POSDB.Sale WHERE ProductID='".$prID['ProductID']."' AND SaleDate >= '".$startDateProduct."' AND SaleDate < '".$endDateProduct."'");
                                 $row = $sql->fetch_array(MYSQLI_ASSOC);
                                 $productSale = $row['sales'];
                                 $productTotalSales = $productTotalSales + $productSale;
@@ -130,7 +210,7 @@ require 'database/connect.php';
                                 $index = $i;
                             }
                         }
-                        echo "<div class=\"well productreport\">Best Selling Product ",$productsArray[$index][0]," : ",'$',$productsArray[$index][1],"</div>";
+                        echo "<div class=\"well productreport\">Best Selling Product<br>",$productsArray[$index][0]," : ",'$',$productsArray[$index][1],"</div>";
                         echo "<table class=\"table table-bordered table-condensed\"><thead><tr><th style=\"width:20px;\">Product</th><th>Sales</th></tr></thead><tbody>";
                         for($i=0;$i<sizeof($productsArray);$i++)
                         {
