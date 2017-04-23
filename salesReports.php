@@ -96,7 +96,7 @@ require 'database/connect.php';
             <!-- tab 2 -->
             <div id="report2" class="tab-pane fade in">
                 <div class="panel panel-default">
-                    <h2>Products by Sales</h2>
+                    <h2>April Product Sales</h2>
                     <hr><div class="col-lg-8">
                     <?php 
                         $sql = $db->query("SELECT ProductName FROM POSDB.Product GROUP BY ProductName");
@@ -130,11 +130,11 @@ require 'database/connect.php';
                                 $index = $i;
                             }
                         }
-                        echo "<div class=\"well productreport\">Best Selling Product ",$productsArray[$index][0]," : ",$productsArray[$index][1],"</div>";
+                        echo "<div class=\"well productreport\">Best Selling Product ",$productsArray[$index][0]," : ",'$',$productsArray[$index][1],"</div>";
                         echo "<table class=\"table table-bordered table-condensed\"><thead><tr><th style=\"width:20px;\">Product</th><th>Sales</th></tr></thead><tbody>";
                         for($i=0;$i<sizeof($productsArray);$i++)
                         {
-                            echo "<tr><td>",$productsArray[$i][0],"</td><td>",$productsArray[$i][1],"</td></tr>";
+                            echo "<tr><td>",$productsArray[$i][0],"</td><td>",'$',$productsArray[$i][1],"</td></tr>";
                         }
                         echo "</tbody></table>";
 
