@@ -120,7 +120,13 @@ require 'database/connect.php';
                     $selection = $_POST['selectedValue'];
                     echo "<script> employeeSales(); </script>";
                 }
-                $query = $db->query("SELECT Sale.SaleID, Employee.EmployeeID, Customer.CustomerID, Product.ProductName, Sale.SaleDate, Sale.Qty, Sale.SaleTotal, Customer.FirstName as cFName, Customer.LastName as cLName, Employee.FirstName as eFName,Employee.LastName as eLName FROM Sale, Employee, Customer, Product WHERE Sale.EmployeeID = $selection AND Sale.CustomerID = Customer.CustomerID AND Sale.ProductID = Product.ProductID");
+                $query = $db->query("SELECT Sale.SaleID, Employee.FirstName AS eFName, Employee.LastName AS eLName, Customer.FirstName AS cFName, Customer.LastName AS cLName, Product.ProductName, Sale.SaleDate, Sale.Qty, Sale.SaleTotal
+                FROM Sale 
+                INNER JOIN Employee ON Sale.EmployeeID = Employee.EmployeeID
+                INNER JOIN Customer ON Sale.CustomerID = Customer.CustomerID
+                INNER JOIN Product ON Sale.ProductID = Product.ProductID
+                WHERE Sale.EmployeeID = $selection
+                ORDER BY Sale.SaleDate DESC");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
