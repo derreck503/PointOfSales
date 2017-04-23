@@ -38,6 +38,7 @@ require 'database/connect.php';
 					foreach($EmployeeLogins as $EInfo){
 					if ($EInfo['EmployeeID'] == $employeeID ) {
 						$Name = $EInfo['FirstName'];
+						$EmployeeIDSale = $EInfo['EmployeeID'];
 						echo '<h1>',$Name,'!</h1>';
 						}
 					}
@@ -49,7 +50,11 @@ require 'database/connect.php';
 	    		<div class="container-fluid">
 		    		<span class="col-md-4 visible-md-block visible-lg-block glyphicon glyphicon-user" style="font-size:60px; color:#64b5f6; padding-top:30px; padding-bottom:20px;"></span>
 		    		<span class="col-xs-12 col-md-8">
-			    		<h1>$200.00</h1>
+			    		<h1><?php
+						$sql11 = $db->query("SELECT SUM(SaleTotal) AS 'salesTotal' FROM POSDB.Sale WHERE EmployeeID = $EmployeeIDSale");
+						$rowz = $sql11->fetch_array(MYSQLI_ASSOC);	
+						echo round($rowz['salesTotal'], 2);					
+						?></h1>
 			    		<h4>Your Sales</h4>
 			    	</span>
 		    	</div>
