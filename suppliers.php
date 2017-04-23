@@ -1,5 +1,9 @@
 <?php
 require 'database/connect.php';
+session_start();
+$employeeID = $_SESSION['Identifier'];
+$sql = $db->query("SELECT * FROM POSDB.Employee WHERE EmployeeID=$employeeID");
+$row = $sql->fetch_array(MYSQLI_ASSOC);
 ?>
   <html>
 
