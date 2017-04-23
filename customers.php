@@ -194,7 +194,7 @@ require 'database/connect.php';
                         $searchValue = $_POST['customerName'];
                         echo "<script> showSearchedCustomer(); </script>";
                         }
-                        $query1 = $db->query("SELECT * FROM POSDB.Customer WHERE FirstName = '$searchValue'");
+                        $query1 = $db->query("SELECT * FROM POSDB.Customer WHERE FirstName LIKE '%$searchValue%' OR LastName LIKE '%$searchValue%'");
                         if($counts = $query1->num_rows){
                             $rows1 = $query1->fetch_all(MYSQLI_ASSOC);
                             foreach($rows1 as $row1){
