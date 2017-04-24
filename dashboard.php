@@ -104,31 +104,6 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
         <div class="col-md-8">
             <row>
             <div class="well">
-				<!--Select Customer from dropdown-->
-				<div class="dropdown form-group">
-					<form action="" method="post" name="myForm" id="myForm">
-					<table>
-						<tr>
-						<td>
-							<select name="selectedValue" class="form-control">
-							<option>Select a Customer</option>
-							<?php
-									$sql = $db->query("SELECT FirstName, LastName, CustomerID FROM POSDB.Customer");
-									if($sql->num_rows){
-										$suppliers = $sql->fetch_all(MYSQLI_ASSOC);
-										foreach($suppliers as $sup){
-											echo '<option value="',$sup['CustomerID'],'" id="selection">',$sup['FirstName'],' ',$sup['LastName'],'</option>';
-										}
-									}
-									?>
-							</select>
-							<td>
-							<input type="submit" class="btn btn-primary" name="CustomerSelect" value="Select Customer" />
-							</td>
-						</tr>
-					</table>
-					</form>
-				</div>
 
         <!--Select Inventroy from dropdown-->
           <div class="dropdown form-group">
@@ -155,42 +130,7 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
               </table>
             </form>
           </div>
-          
-
-		  <!--Clear Cart-->
-			<form action="" method="post" name="myForm" id="myForm">
-                        <input type="submit" class="btn btn-primary" name="ClearCart" value="Clear Cart" />
-                </form>
-
-					<?php
-					if(isset($_POST['ClearCart'])){
-					$_SESSION['cart'] = array();
-					}
-					?>
-
-		  <!--Checkout Cart-->
-			<form action="" method="post" name="myForm1" id="myForm1">
-                        <input type="submit" class="btn btn-primary" name="checkOutCart" value="Checkout Cart" />
-                </form>
-
-					<?php
-					if(isset($_POST['checkOutCart'])){
-					//$_SESSION['cart'] = array();
-					echo "Cart has been checkedout!";
-					foreach($_SESSION['cart'] as $rows){
-						//echo'<br>Data: ';
-						//echo $rows;
-						$query1 = $db->query("SELECT ProductName FROM POSDB.Product WHERE ProductID = $rows");
-						$productId = mysql_query($query1);
-						//echo 'product Id: ';
-						//echo $productId;
-						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`,`CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES(0, 1, 1, $rows,'2017-04-15', 1, 5)");
-	                	$results = mysql_query($create);
-					}
-					}
-					?>
-					
-					<hr>
+        
 
 			 <!--Checkout Table-->
 			 <h2>Checkout Cart:</h2>
@@ -237,16 +177,75 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
         </div>
         <!--4 column width for the News container-->
         <div class="col-md-4">
+		<div class="well">
+		<row>
+			<!--Clear Cart-->
+			<form action="" method="post" name="myForm" id="myForm">
+                        <input type="submit" class="btn btn-primary" name="ClearCart" value="Clear Cart" />
+                </form>
+
+					<?php
+					if(isset($_POST['ClearCart'])){
+					$_SESSION['cart'] = array();
+					}
+					?>
+
+		  <!--Checkout Cart-->
+		<div class="dropdown form-group">
+			<form action="" method="post" name="myForm1" id="myForm1">
+								<table>
+						<tr>
+						<td>
+							<select name="selectedCustomer" class="form-control">
+							<option>Select a Customer</option>
+							<?php
+									$sql = $db->query("SELECT FirstName, LastName, CustomerID FROM POSDB.Customer");
+									if($sql->num_rows){
+										$suppliers = $sql->fetch_all(MYSQLI_ASSOC);
+										foreach($suppliers as $sup){
+											echo '<option value="',$sup['CustomerID'],'" id="selection">',$sup['FirstName'],' ',$sup['LastName'],'</option>';
+										}
+									}
+									?>
+							</select>
+							<td>
+							<input type="submit" class="btn btn-primary" name="checkOutCart" value="Checkout Cart" />
+							</td>
+						</tr>
+					</table>
+                </form>
+				</div>
+
+					<?php
+					if(isset($_POST['checkOutCart'])){
+					//$_SESSION['cart'] = array();
+					echo "Cart has been checkedout! ";
+						$customerID = $_POST['selectedCustomer'];
+						echo "Selected Customer: ";
+						echo $customerID;
+					foreach($_SESSION['cart'] as $rows){
+						//echo'<br>Data: ';
+						//echo $rows;
+						$query1 = $db->query("SELECT ProductName FROM POSDB.Product WHERE ProductID = $rows");
+						$productId = mysql_query($query1);
+						//echo 'product Id: ';
+						//echo $productId;
+						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`,`CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES(0, 1, 1, $rows,'2017-04-15', 1, 5)");
+	                	$results = mysql_query($create);
+					}
+					}
+					?>
+		</row>
             <row>
-            <div class="well">
                 <h2>News:</h2>
 					<ul>
 						<li><h4>NewBorn Outlet is projected to hit its April sales goal 5 days early!</h4></li>
 						<li><h4>Company picnic is this upcomming Saturday!</h4></li>
 						<li><h4>All timesheets are due this 4/2
 					</ul>
-               </div>
+              
             </row>
+  			</div>
         </div>
     </div>
 </body>
