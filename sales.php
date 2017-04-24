@@ -83,7 +83,7 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
           <!--Each tr is a row and td is a cell for each column-->
           <tbody>
             <?php
-                $query = $db->query("SELECT Sale.SaleID, Employee.EmployeeID, Customer.CustomerID, Product.ProductName, Sale.SaleDate, Sale.Qty, Sale.SaleTotal, Customer.FirstName as cFName, Customer.LastName as cLName, Employee.FirstName as eFName,Employee.LastName as eLName FROM Sale, Employee, Customer, Product WHERE Sale.EmployeeID = Employee.EmployeeID AND Sale.CustomerID = Customer.CustomerID AND Sale.ProductID = Product.ProductID");
+                $query = $db->query("SELECT Sale.SaleID, Employee.EmployeeID, Customer.CustomerID, Product.ProductName, Sale.SaleDate, Sale.Qty, Sale.SaleTotal, Customer.FirstName as cFName, Customer.LastName as cLName, Employee.FirstName as eFName,Employee.LastName as eLName FROM Sale, Employee, Customer, Product WHERE Sale.EmployeeID = Employee.EmployeeID AND Sale.CustomerID = Customer.CustomerID AND Sale.ProductID = Product.ProductID ORDER BY Sale.SaleID DESC");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
