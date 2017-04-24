@@ -233,14 +233,7 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
 						//$_SESSION['cart'] = array();
 						echo "Cart has been checkedout! ";
 						$customerID = $_POST['selectedCustomer'];
-						echo "Selected Customer: ";
-						echo $customerID;
-						echo "<br>";
-
 					    foreach($_SESSION['cartz'] as $rowz){
-						$pID = $rowz;
-						echo " Inserting: ";
-						echo $pID;
  						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`, `CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES (0, $EmployeeIDSale, $customerID, $rowz, '2017-04-23', 5, 5)");
                 		$results = exec($create);
 						}
