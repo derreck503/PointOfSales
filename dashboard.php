@@ -139,6 +139,7 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
 				<thead>
 					<tr>
 					<th>Product Name</th>
+					<th>Description</th>
 					<th>Qty In Stock</th>
 					<th>Price</th>
 					</tr>
@@ -151,17 +152,27 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
 					if(empty($_SESSION['cart'])){
 					$_SESSION['cart'] = array();
 					}
-                    $myArr = array();
-					//$myArr = array("Baby Shoes","Baby shirt","Diapers");
-					//$myArr[] = $selection;
+					if(empty($_SESSION['cartz'])){
+					$_SESSION['cartz'] = array();
+					}
 					array_push($_SESSION['cart'], $selection);
-					//$arrlength = count($cart);
 					foreach($_SESSION['cart'] as $rows){
-						echo'<tr>';
-						echo'<td>',$rows,'</td>';
-						echo'<td>5</td>';
-						echo'<td>5</td>';
-						echo'</tr>';
+					$query = $db->query("SELECT ProductName, ProductID, ProductDetail.Description AS Descriptions, QtyInStock, UnitPrice 
+						FROM Product
+						INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID
+						WHERE Product.ProductName = '$rows'");
+                	if($count = $query->num_rows){
+                    $rowss = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rowss as $row){
+						array_push($_SESSION['cartz'], $row['ProductID']);
+                        echo'<tr>';
+                        echo'<td>', $row['ProductName'],'</td>';
+                        echo'<td>', $row['Descriptions'], ' ',$row['eLName'],'</td>';
+                        echo'<td>', $row['QtyInStock'], ' ',$row['cLName'], '</td>';
+                        echo'<td>', $row['UnitPrice'],'</td>';
+                        echo'</tr>';
+                    }
+                }
 					}
 					
 					$eName = "1";
@@ -181,12 +192,13 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
 		<row>
 			<!--Clear Cart-->
 			<form action="" method="post" name="myForm" id="myForm">
-                        <input type="submit" class="btn btn-primary" name="ClearCart" value="Clear Cart" />
+                        <input type="submit" class="btn btn-primary btn-block" name="ClearCart" value="Clear Cart" />
                 </form>
 
 					<?php
 					if(isset($_POST['ClearCart'])){
 					$_SESSION['cart'] = array();
+					$_SESSION['cartz'] = array();
 					}
 					?>
 
@@ -218,22 +230,21 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
 
 					<?php
 					if(isset($_POST['checkOutCart'])){
-					//$_SESSION['cart'] = array();
-					echo "Cart has been checkedout! ";
+						//$_SESSION['cart'] = array();
+						echo "Cart has been checkedout! ";
 						$customerID = $_POST['selectedCustomer'];
 						echo "Selected Customer: ";
 						echo $customerID;
-					foreach($_SESSION['cart'] as $rows){
-						//echo'<br>Data: ';
-						//echo $rows;
-						$query1 = $db->query("SELECT ProductName FROM POSDB.Product WHERE ProductID = $rows");
-						$productId = mysql_query($query1);
-						//echo 'product Id: ';
-						//echo $productId;
-						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`,`CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES(0, 1, 1, $rows,'2017-04-15', 1, 5)");
-	                	$results = mysql_query($create);
-					}
-					}
+						echo "<br>";
+
+					    foreach($_SESSION['cartz'] as $rowz){
+						$pID = $rowz;
+						echo " Inserting: ";
+						echo $pID;
+ 						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`, `CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES (0, $EmployeeIDSale, $customerID, $rowz, '2017-04-23', 5, 5)");
+                		$results = exec($create);
+						}
+                    }
 					?>
 		</row>
             <row>
