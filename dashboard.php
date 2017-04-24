@@ -235,7 +235,12 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
 						$customerID = $_POST['selectedCustomer'];
 					    foreach($_SESSION['cartz'] as $rowz){
  						$create = $db->query("INSERT INTO POSDB.Sale (`SaleID`, `EmployeeID`, `CustomerID`, `ProductID`, `SaleDate`, `Qty`, `SaleTotal`) VALUES (0, $EmployeeIDSale, $customerID, $rowz, '2017-04-23', 5, 5)");
-                		$results = exec($create);
+                		$delete =$db->query("UPDATE POSDB.Product SET Product.QtyInStock = 9 WHERE Product.ProductID = $rowz");
+						$results = exec($create, $delete);
+						//$results = mysqli_multi_query($create, $delete);
+																		
+						//$delete =$db->query("UPDATE POSDB.Product SET QtyInStock 9 WHERE ProductID = $rowz");
+						//$resultz = exec($delete);
 						}
                     }
 					?>

@@ -6,6 +6,12 @@ $sql = $db->query("SELECT * FROM POSDB.Employee WHERE EmployeeID=$employeeID");
 $row = $sql->fetch_array(MYSQLI_ASSOC);
 ?>
 
+<?php
+echo "starting trigger test";
+
+
+?>
+
 <html>
 
 <html>
