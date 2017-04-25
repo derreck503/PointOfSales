@@ -4,12 +4,17 @@ session_start();
 $employeeID = $_SESSION['Identifier'];
 $sql = $db->query("SELECT * FROM POSDB.Employee WHERE EmployeeID=$employeeID");
 $row = $sql->fetch_array(MYSQLI_ASSOC);
-?>
 
-<?php
-echo "starting trigger test";
-
-
+//echo "starting trigger test";
+$sql7 = $db->query("SELECT Product.ProductName, Product.QtyInStock FROM POSDB.Product WHERE Product.QtyInStock < 10");
+$rowd = $sql7->fetch_array(MYSQLI_ASSOC);
+foreach($rowd as $QtyInfo){
+            //echo "Low Inventory";
+            $item = $QtyInfo['ProductName'];
+            echo'<div class="alert alert-danger fade in">';
+            echo '<a href="#" class="close" data-dismiss="alert" style="text-align: center;" aria-label="close">&times;</a>Low Inventory on item: ',$item,'</div>';
+            echo '</div>';
+}
 ?>
 
 <html>
