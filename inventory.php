@@ -12,7 +12,7 @@ foreach($rowd as $QtyInfo){
             //echo "Low Inventory";
             $item = $QtyInfo['ProductName'];
             echo'<div class="alert alert-danger fade in">';
-            echo '<a href="#" class="close" data-dismiss="alert" style="text-align: center;" aria-label="close">&times;</a>Low Inventory on item: ',$item,'</div>';
+            echo '<a href="#" class="close" data-dismiss="alert" style="text-align: center;" aria-label="close">&times;</a>Low Inventory!</div>';
             echo '</div>';
 }
 ?>
@@ -36,6 +36,7 @@ foreach($rowd as $QtyInfo){
     <script src="js/custom.js"></script>
     <script src="js/showProduct.js"></script>
     <script src="js/showProducts.js"></script>
+    <script src="js/showTriggers.js"></script>
 
     <style type="text/css">
         .product .form-control {
@@ -81,6 +82,9 @@ foreach($rowd as $QtyInfo){
         <div class="well">
           <!--Show All Inventory Button-->
           <button type="button" class="btn btn-primary" onclick="showAll();">Show all Inventory</button>
+          <hr>
+          <!--Show All Triggers Button-->
+          <button type="button" class="btn btn-primary" onclick="showAllTrigger();">Show Low Inventory</button>
           <hr>
           <!--Select Inventroy from dropdown-->
           <div class="dropdown form-group">
@@ -216,7 +220,7 @@ foreach($rowd as $QtyInfo){
                 $quantity = $_POST['Quantity'];
                 $unitPrice = $_POST['UnitPrice'];
 
-                $create = $db->query("INSERT INTO POSDB.Product (`ProductID`, `ProductName`, `SupplierID`, `ProductDetail`, `QtyInStock`, `UnitPrice`) VALUES(0, '$PName', '$supplier', '$productDetail', '$category', '$quantity', '$unitPrice')");
+                $create = $db->query("INSERT INTO POSDB.Product (`ProductID`, `ProductName`, `SupplierID`, `ProductDetailID`, `Category`, `QtyInStock`, `UnitPrice`, `Status`) VALUES(0, '$PName', '$supplier', '$productDetail', '$category', '$quantity', '$unitPrice', 'Normal')");
 
                 $results = mysql_query($create);
             }
@@ -243,6 +247,42 @@ foreach($rowd as $QtyInfo){
                 FROM Product
                 INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID
                 INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID");
+                if($count = $query->num_rows){
+                    $rows = $query->fetch_all(MYSQLI_ASSOC);
+                    foreach($rows as $row){
+                        echo'<tr>';
+                        echo'<td>', $row['ProductID'],'</td>';
+                        echo'<td>', $row['ProductName'],'</td>';
+                        echo'<td>', $row['Supplier'],'</td>';
+                        echo'<td>', $row['Description'],'</td>';
+                        echo'<td>', $row['Category'],'</td>';
+                        echo'<td>', $row['QtyInStock'],'</td>';
+                        echo'<td>', $row['UnitPrice'],'</td>';
+                        echo'</tr>';
+                    }
+                }
+                ?>
+          </tbody>
+        </table>
+
+        <!-- Table for showing all triggers -->
+        <table class="table table-striped" id="showAllTriggers" style="display:none">
+          <!--Head means title columns-->
+          <thead>
+            <tr>
+              <th>ProductID</th>
+              <th>Product Name</th>
+              <th>Supplier</th>
+              <th>Product Details</th>
+              <th>Category</th>
+              <th>Qty In Stock</th>
+              <th>Unit Stock</th>
+            </tr>
+          </thead>
+          <!--Each tr is a row and td is a cell for each column-->
+          <tbody>
+            <?php
+                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Supplier.CompanyName AS Supplier, ProductDetail.Description AS Description, Product.Category, Product.QtyInStock, Product.UnitPrice FROM Product INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID WHERE Product.QtyInStock < 10");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
