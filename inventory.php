@@ -238,12 +238,13 @@ foreach($rowd as $QtyInfo){
               <th>Category</th>
               <th>Qty In Stock</th>
               <th>Unit Stock</th>
+              <th>Status</th>
             </tr>
           </thead>
           <!--Each tr is a row and td is a cell for each column-->
           <tbody>
             <?php
-                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Supplier.CompanyName AS Supplier, ProductDetail.Description AS Description, Product.Category, Product.QtyInStock, Product.UnitPrice
+                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Product.Status, Supplier.CompanyName AS Supplier, ProductDetail.Description AS Description, Product.Category, Product.QtyInStock, Product.UnitPrice
                 FROM Product
                 INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID
                 INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID");
@@ -258,6 +259,7 @@ foreach($rowd as $QtyInfo){
                         echo'<td>', $row['Category'],'</td>';
                         echo'<td>', $row['QtyInStock'],'</td>';
                         echo'<td>', $row['UnitPrice'],'</td>';
+                        echo'<td>', $row['Status'],'</td>';
                         echo'</tr>';
                     }
                 }
@@ -277,12 +279,13 @@ foreach($rowd as $QtyInfo){
               <th>Category</th>
               <th>Qty In Stock</th>
               <th>Unit Stock</th>
+              <th>Status</th>
             </tr>
           </thead>
           <!--Each tr is a row and td is a cell for each column-->
           <tbody>
             <?php
-                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Supplier.CompanyName AS Supplier, ProductDetail.Description AS Description, Product.Category, Product.QtyInStock, Product.UnitPrice FROM Product INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID WHERE Product.QtyInStock < 10");
+                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Product.Status , Supplier.CompanyName AS Supplier, ProductDetail.Description AS Description, Product.Category, Product.QtyInStock, Product.UnitPrice FROM Product INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID WHERE Product.QtyInStock < 10");
                 if($count = $query->num_rows){
                     $rows = $query->fetch_all(MYSQLI_ASSOC);
                     foreach($rows as $row){
@@ -294,6 +297,7 @@ foreach($rowd as $QtyInfo){
                         echo'<td>', $row['Category'],'</td>';
                         echo'<td>', $row['QtyInStock'],'</td>';
                         echo'<td>', $row['UnitPrice'],'</td>';
+                        echo'<td>', $row['Status'],'</td>';
                         echo'</tr>';
                     }
                 }
@@ -313,6 +317,7 @@ foreach($rowd as $QtyInfo){
               <th>Category</th>
               <th>Qty In Stock</th>
               <th>Unit Price</th>
+              <th>Status</th>
             </tr>
           </thead>
           <!--Each tr is a row and td is a cell for each column-->
@@ -322,7 +327,7 @@ foreach($rowd as $QtyInfo){
                     $selection = $_POST['selectedValue'];
                     echo "<script> showProduct(); </script>";
                 }
-                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Supplier.CompanyName, ProductDetail.Description, Product.Category, Product.QtyInStock, Product.UnitPrice
+                $query = $db->query("SELECT Product.ProductID, Product.ProductName, Product.Status, Supplier.CompanyName, ProductDetail.Description, Product.Category, Product.QtyInStock, Product.UnitPrice
                 FROM Product
                 INNER JOIN Supplier ON Product.SupplierID = Supplier.SupplierID
                 INNER JOIN ProductDetail ON Product.ProductDetailID = ProductDetail.ProductDetailID
@@ -338,6 +343,7 @@ foreach($rowd as $QtyInfo){
                         echo'<td>', $row['Category'],'</td>';
                         echo'<td>', $row['QtyInStock'],'</td>';
                         echo'<td>', $row['UnitPrice'],'</td>';
+                        echo'<td>', $row['Status'],'</td>';
                         echo'</tr>';
                     }
                 }
