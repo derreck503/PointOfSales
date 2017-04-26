@@ -22,6 +22,7 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
     <script src="js/custom.js"></script>
     <script src="js/showAllCustomers.js"></script>
     <script src="js/showCustomer.js"></script>
+    <script src="js/reload.js"></script>
 
     <style type="text/css">
         .customers .form-control {
@@ -87,10 +88,13 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
                 $country = $_POST['Country'];
                 $phone = $_POST['Phone'];
                 $email = $_POST['Email'];
-                $membership = $_POST['Membership'];
+                $membership = 1;
+                $value = $_POST['Membership'];
 
                 $create = $db->query("INSERT INTO POSDB.Customer (`CustomerID`, `LastName`, `FirstName`, `Address`, `City`, `PostalCode`, `Country`, `Phone`, `Email`, `Membership`) VALUES (0, '$LName', '$FName','$address', '$city', '$postalCode', '$country', '$phone', '$email', $membership)");
                 $results = mysql_query($create);
+                
+                echo '<script type="text/javascript">','reloadPage();','</script>';
             }
           ?>
             <hr>
@@ -128,6 +132,8 @@ $row = $sql->fetch_array(MYSQLI_ASSOC);
                     $result = mysql_query($delete);
                     //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
                     //header("Refresh:0");
+                    //header('location:customers.php');
+                    echo '<script type="text/javascript">','reloadPage();','</script>';
                 }
                 ?>
             </div>

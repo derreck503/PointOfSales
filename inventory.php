@@ -11,10 +11,15 @@ $rowd = $sql7->fetch_array(MYSQLI_ASSOC);
 foreach($rowd as $QtyInfo){
             //echo "Low Inventory";
             $item = $QtyInfo['ProductName'];
+            $count++;
+}
+
+if ($count > 0) {
             echo'<div class="alert alert-danger fade in">';
             echo '<a href="#" class="close" data-dismiss="alert" style="text-align: center;" aria-label="close">&times;</a>Low Inventory!</div>';
             echo '</div>';
 }
+
 ?>
 
 <html>
@@ -150,6 +155,7 @@ foreach($rowd as $QtyInfo){
                     //echo $updateAmount;
                     $update = $db->query("UPDATE POSDB.Product SET QtyInStock = $updateAmount WHERE ProductID = $updateValue");
                     $result = mysql_query($update);
+                     echo '<meta http-equiv="refresh" content="0">';
                     //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
                     //header("Refresh:0");
                 }
@@ -186,6 +192,7 @@ foreach($rowd as $QtyInfo){
                     echo $deletion;
                     $delete = $db->query("DELETE FROM POSDB.Product Where ProductID = $deletion");
                     $result = mysql_query($delete);
+                    echo '<meta http-equiv="refresh" content="0">';
                     //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
                     //header("Refresh:0");
                 }
@@ -223,6 +230,7 @@ foreach($rowd as $QtyInfo){
                 $create = $db->query("INSERT INTO POSDB.Product (`ProductID`, `ProductName`, `SupplierID`, `ProductDetailID`, `Category`, `QtyInStock`, `UnitPrice`, `Status`) VALUES(0, '$PName', '$supplier', '$productDetail', '$category', '$quantity', '$unitPrice', 'Normal')");
 
                 $results = mysql_query($create);
+                echo '<meta http-equiv="refresh" content="0">';
             }
           ?>
         </div>
