@@ -155,7 +155,7 @@ if ($count > 0) {
                     //echo $updateAmount;
                     $update = $db->query("UPDATE POSDB.Product SET QtyInStock = $updateAmount WHERE ProductID = $updateValue");
                     $result = mysql_query($update);
-                     echo '<meta http-equiv="refresh" content="0">';
+                     //echo '<meta http-equiv="refresh" content="0">';
                     //Need to refresh page to not show deleted value in dropdown menu anymore!!!!!
                     //header("Refresh:0");
                 }
