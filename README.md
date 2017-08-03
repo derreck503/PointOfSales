@@ -1,5 +1,6 @@
 # NewBorn Outlet
 A simple and easy to use point of sales sytem. Built without any frameworks, only using HTML, CSS, JavaScript, PHP, and MySQL. 
+<br><a href="http://newbornoutlet.com">Click here to demo!</a>
 
 # Features
 <ul>
