@@ -5,9 +5,22 @@ A simple and easy to use point of sales sytem. Built with HTML, CSS, JavaScript,
 <ul>
     <li>User authentication and roles</li>
     <li>Generate complex inventory reports</li>
+    <li>Customer rewards program and purchase history</li>
     <li>Strong database contraints and triggers to keep data valid</li>
 </ul>
 
 # Screenshots
 
 <img src="/NewbornOutletImages/login.png" alt="Smiley face" height=500>
+
+# Dashboard
+
+<img src="/NewbornOutletImages/dashboard.png" alt="Smiley face" height=500>
+
+# Reports
+
+<img src="/NewbornOutletImages/reports.png" alt="Smiley face" height=500>
+
+# Accounts
+
+<img src="/NewbornOutletImages/account_one.png" alt="Smiley face" height=500>
