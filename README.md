@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head></head>
-<body>
-<h1>Point of Sale Web App</h1>
-<h4>Link to web app: newbornoutlet.com!</h4>
-</body>
-</html>
+# NewBorn Outlet
+A simple and easy to use point of sales sytem with a baby theme. Built with HTML, CSS, JavaScript, PHP, and MySQL.
+
+<img src="/NewbornOutletImages/login.png" alt="Smiley face" height=500>
