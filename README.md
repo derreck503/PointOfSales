@@ -1,5 +1,5 @@
 # NewBorn Outlet
-A simple and easy to use point of sales sytem. Built with HTML, CSS, JavaScript, PHP, and MySQL. 
+A simple and easy to use point of sales sytem. Built without any frameworks, only using HTML, CSS, JavaScript, PHP, and MySQL. 
 
 # Features
 <ul>
@@ -11,16 +11,16 @@ A simple and easy to use point of sales sytem. Built with HTML, CSS, JavaScript,
 
 # Screenshots
 
-<img src="/NewbornOutletImages/login.png" alt="Smiley face" height=500>
+<img src="/NewbornOutletImages/login.png" alt="Smiley face" height=250>
 
 # Dashboard
 
-<img src="/NewbornOutletImages/dashboard.png" alt="Smiley face" height=500>
+<img src="/NewbornOutletImages/dashboard.png" alt="Smiley face" height=350>
 
 # Reports
 
-<img src="/NewbornOutletImages/reports.png" alt="Smiley face" height=500>
+<img src="/NewbornOutletImages/reports.png" alt="Smiley face" height=400>
 
 # Accounts
 
-<img src="/NewbornOutletImages/account_one.png" alt="Smiley face" height=500>
+<img src="/NewbornOutletImages/account_one.png" alt="Smiley face" height=200>
