@@ -15,12 +15,12 @@ A simple and easy to use point of sales sytem. Built without any frameworks, onl
 
 # Dashboard
 
-<img src="/NewbornOutletImages/dashboard.png" alt="Smiley face" height=350>
+<img src="/NewbornOutletImages/dashboard.png" alt="Smiley face" height=250>
 
 # Reports
 
-<img src="/NewbornOutletImages/reports.png" alt="Smiley face" height=400>
+<img src="/NewbornOutletImages/reports.png" alt="Smiley face" height=250>
 
 # Accounts
 
-<img src="/NewbornOutletImages/account_one.png" alt="Smiley face" height=200>
+<img src="/NewbornOutletImages/account_one.png" alt="Smiley face" height=250>
